@@ -1,0 +1,140 @@
+﻿namespace Paint
+{
+    partial class MainForm
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            menuStrip1 = new MenuStrip();
+            MenuFile = new ToolStripMenuItem();
+            MainToolBar = new ToolStrip();
+            StatusBar = new StatusStrip();
+            pbCanvas = new PictureBox();
+            pnlColorPalete = new Panel();
+            colorPalete1 = new Controls.ColorPalete();
+            menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbCanvas).BeginInit();
+            pnlColorPalete.SuspendLayout();
+            SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(20, 20);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { MenuFile });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 28);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // MenuFile
+            // 
+            MenuFile.Name = "MenuFile";
+            MenuFile.Size = new Size(46, 24);
+            MenuFile.Text = "File";
+            // 
+            // MainToolBar
+            // 
+            MainToolBar.ImageScalingSize = new Size(20, 20);
+            MainToolBar.Location = new Point(0, 28);
+            MainToolBar.Name = "MainToolBar";
+            MainToolBar.Size = new Size(800, 25);
+            MainToolBar.TabIndex = 1;
+            MainToolBar.Text = "toolStrip1";
+            // 
+            // StatusBar
+            // 
+            StatusBar.ImageScalingSize = new Size(20, 20);
+            StatusBar.Location = new Point(0, 428);
+            StatusBar.Name = "StatusBar";
+            StatusBar.Size = new Size(800, 22);
+            StatusBar.TabIndex = 2;
+            StatusBar.Text = "statusStrip1";
+            // 
+            // pbCanvas
+            // 
+            pbCanvas.BackColor = SystemColors.Control;
+            pbCanvas.Dock = DockStyle.Fill;
+            pbCanvas.Location = new Point(0, 53);
+            pbCanvas.Name = "pbCanvas";
+            pbCanvas.Size = new Size(708, 375);
+            pbCanvas.TabIndex = 3;
+            pbCanvas.TabStop = false;
+            pbCanvas.MouseDown += pbCanvas_MouseDown;
+            pbCanvas.MouseMove += pbCanvas_MouseMove;
+            pbCanvas.MouseUp += pbCanvas_MouseUp;
+            // 
+            // pnlColorPalete
+            // 
+            pnlColorPalete.Controls.Add(colorPalete1);
+            pnlColorPalete.Dock = DockStyle.Right;
+            pnlColorPalete.Location = new Point(708, 53);
+            pnlColorPalete.Name = "pnlColorPalete";
+            pnlColorPalete.Size = new Size(92, 375);
+            pnlColorPalete.TabIndex = 4;
+            // 
+            // colorPalete1
+            // 
+            colorPalete1.Location = new Point(27, 23);
+            colorPalete1.Name = "colorPalete1";
+            colorPalete1.Size = new Size(32, 302);
+            colorPalete1.TabIndex = 0;
+            // 
+            // MainForm
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(pbCanvas);
+            Controls.Add(pnlColorPalete);
+            Controls.Add(StatusBar);
+            Controls.Add(MainToolBar);
+            Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip1;
+            Name = "MainForm";
+            Text = "Paint";
+            FormClosing += MainForm_FormClosing;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbCanvas).EndInit();
+            pnlColorPalete.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem MenuFile;
+        private ToolStrip MainToolBar;
+        private StatusStrip StatusBar;
+        private PictureBox pbCanvas;
+        private Panel pnlColorPalete;
+        private Controls.ColorPalete colorPalete1;
+    }
+}
