@@ -26,7 +26,7 @@ namespace Paint.Controls
         private void CurrentColorDisplay_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-
+/*
             using (Pen pen1 = new Pen(SystemColors.ControlDark))
             using (Pen pen2 = new Pen(SystemColors.Control))
             {
@@ -40,7 +40,7 @@ namespace Paint.Controls
                 }
                 graphics.DrawRectangle(pen1, 0, 0, this.Width - 1, this.Height - 1);
                 graphics.DrawRectangle(pen2, 1, 1, this.Width - 3, this.Height - 3);
-            }
+            }*/
         }
     }
 }

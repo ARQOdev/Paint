@@ -1,4 +1,8 @@
 using Paint.Controls;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+
 
 namespace Paint
 {
@@ -16,6 +20,12 @@ namespace Paint
             canvas_bitmap = new Bitmap(800, 600);
             canvas_graphics = Graphics.FromImage(canvas_bitmap);
             canvas_graphics.Clear(Color.White);
+            canvas_graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            canvas_graphics.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+            canvas_graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            canvas_graphics.CompositingMode = CompositingMode.SourceOver;
+            canvas_graphics.CompositingQuality = CompositingQuality.HighQuality;
+
             pbCanvas.Image = canvas_bitmap;
         }
 
@@ -29,7 +39,9 @@ namespace Paint
         {
             if (drawing)
             {
-                Color color = (ColorPaleteItem.CurrentColor == null) ? Color.Black : ColorPaleteItem.CurrentColor.Color;
+                Color color = UserPalete.PaleteForeColor;
+                if (e.Button == MouseButtons.Right)
+                    color = UserPalete.PaleteBackColor;
                 using (Pen pen = new Pen(color, 2))
                 {
                     canvas_graphics.DrawLine(pen, prev_point, e.Location);

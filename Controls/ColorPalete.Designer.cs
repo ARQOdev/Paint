@@ -35,8 +35,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Name = "ColorPalete";
-            Size = new Size(75, 242);
-            Paint += ColorPalete_Paint;
+            Size = new Size(76, 242);
             ResumeLayout(false);
         }
 

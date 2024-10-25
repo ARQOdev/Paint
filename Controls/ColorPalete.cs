@@ -13,15 +13,44 @@ namespace Paint.Controls
     public partial class ColorPalete : UserControl
     {
         public int ItemCount { get; set; }
-        public Color ForeColor { get; set; }
-        public Color BackColor { get; set; }
+        public Color PaleteForeColor
+        {
+            get
+            {
+                return ForeColorItem.Color;
+            }
+        }
+        public Color PaleteBackColor
+        {
+            get
+            {
+                return BackColorItem.Color;
+            }
+        }
+        private ColorPaleteItem ForeColorItem { get; set; }
+        private ColorPaleteItem BackColorItem { get; set; }
 
+        private int border = 1;
+        private int gap = 2;
 
         private List<ColorPaleteItem> palete;
         private List<Color> colors;
         public ColorPalete()
         {
             InitializeComponent();
+
+            ForeColorItem = new ColorPaleteItem();
+            ForeColorItem.Color = Color.Black;
+            this.Controls.Add(ForeColorItem);
+            ForeColorItem.Size = new Size(50, 50);
+            ForeColorItem.Location = new Point((this.Width - ForeColorItem.Width) / 2, border);
+
+            BackColorItem = new ColorPaleteItem();
+            BackColorItem.Color = Color.White;
+            this.Controls.Add(BackColorItem);
+            BackColorItem.Size = new Size(40, 40);
+            BackColorItem.Location = new Point((this.Width - BackColorItem.Width) / 2, ForeColorItem.Bottom + gap);
+
             palete = new List<ColorPaleteItem>();
             colors = new List<Color>() {
                 Color.Black,
@@ -69,15 +98,27 @@ namespace Paint.Controls
                     item.Color = colors[i];
                 }
                 this.Controls.Add(item);
-                item.Location = new Point(i / 10 * 24 + i / 10, j * item.Height + j);
+                item.Location = new Point(i / 10 * item.Width + i / 10, BackColorItem.Bottom + 6*gap + j * item.Height + j);
                 palete.Add(item);
+                item.ItemClicked += PaleteItemClicked;
                 j++;
             }
         }
 
-        private void ColorPalete_Paint(object sender, PaintEventArgs e)
+        private void PaleteItemClicked(object sender, EventArgs e)
         {
-
+            ColorPaleteItem item = (ColorPaleteItem)sender;
+            MouseEventArgs args = (MouseEventArgs)e;
+            if (args.Button == MouseButtons.Left)
+            {
+                ForeColorItem.Color = item.Color;
+                ForeColorItem.Invalidate();
+            }
+            else if (args.Button == MouseButtons.Right)
+            {
+                BackColorItem.Color = item.Color;
+                BackColorItem.Invalidate();
+            }
         }
     }
 }

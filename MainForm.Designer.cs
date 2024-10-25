@@ -35,7 +35,9 @@
             StatusBar = new StatusStrip();
             pbCanvas = new PictureBox();
             pnlColorPalete = new Panel();
-            colorPalete1 = new Controls.ColorPalete();
+            UserPalete = new Controls.ColorPalete();
+            editToolStripMenuItem = new ToolStripMenuItem();
+            canvasSizeToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCanvas).BeginInit();
             pnlColorPalete.SuspendLayout();
@@ -44,7 +46,7 @@
             // menuStrip1
             // 
             menuStrip1.ImageScalingSize = new Size(20, 20);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { MenuFile });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { MenuFile, editToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 28);
@@ -77,7 +79,7 @@
             // 
             // pbCanvas
             // 
-            pbCanvas.BackColor = SystemColors.Control;
+            pbCanvas.BackColor = Color.FromArgb(203, 213, 228);
             pbCanvas.Dock = DockStyle.Fill;
             pbCanvas.Location = new Point(0, 53);
             pbCanvas.Name = "pbCanvas";
@@ -90,7 +92,7 @@
             // 
             // pnlColorPalete
             // 
-            pnlColorPalete.Controls.Add(colorPalete1);
+            pnlColorPalete.Controls.Add(UserPalete);
             pnlColorPalete.Dock = DockStyle.Right;
             pnlColorPalete.Location = new Point(712, 53);
             pnlColorPalete.Name = "pnlColorPalete";
@@ -98,13 +100,26 @@
             pnlColorPalete.TabIndex = 4;
             pnlColorPalete.Paint += pnlColorPalete_Paint;
             // 
-            // colorPalete1
+            // UserPalete
             // 
-            colorPalete1.ItemCount = 30;
-            colorPalete1.Location = new Point(6, 120);
-            colorPalete1.Name = "colorPalete1";
-            colorPalete1.Size = new Size(76, 252);
-            colorPalete1.TabIndex = 0;
+            UserPalete.ItemCount = 30;
+            UserPalete.Location = new Point(6, 3);
+            UserPalete.Name = "UserPalete";
+            UserPalete.Size = new Size(76, 369);
+            UserPalete.TabIndex = 0;
+            // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { canvasSizeToolStripMenuItem });
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new Size(49, 24);
+            editToolStripMenuItem.Text = "Edit";
+            // 
+            // canvasSizeToolStripMenuItem
+            // 
+            canvasSizeToolStripMenuItem.Name = "canvasSizeToolStripMenuItem";
+            canvasSizeToolStripMenuItem.Size = new Size(224, 26);
+            canvasSizeToolStripMenuItem.Text = "Canvas Size";
             // 
             // MainForm
             // 
@@ -137,6 +152,8 @@
         private StatusStrip StatusBar;
         private PictureBox pbCanvas;
         private Panel pnlColorPalete;
-        private Controls.ColorPalete colorPalete1;
+        private Controls.ColorPalete UserPalete;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem canvasSizeToolStripMenuItem;
     }
 }
