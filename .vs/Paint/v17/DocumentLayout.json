@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\controls\\colorpaleteitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:controls\\colorpaleteitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\controls\\colorpalete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:controls\\colorpalete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\controls\\colorpalete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:controls\\colorpalete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\controls\\currentcolordisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:controls\\currentcolordisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 334,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -42,18 +46,45 @@
               "EditorCaption": " [Design]"
             },
             {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainForm.cs",
+              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
+              "RelativeDocumentMoniker": "MainForm.cs",
+              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
+              "RelativeToolTip": "MainForm.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAAADIAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-24T17:15:36.586Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "CurrentColorDisplay.cs",
+              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\CurrentColorDisplay.cs",
+              "RelativeDocumentMoniker": "Controls\\CurrentColorDisplay.cs",
+              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\CurrentColorDisplay.cs",
+              "RelativeToolTip": "Controls\\CurrentColorDisplay.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAACkAAABUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-25T10:27:59.937Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ColorPalete.cs",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPalete.cs",
               "RelativeDocumentMoniker": "Controls\\ColorPalete.cs",
               "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPalete.cs",
               "RelativeToolTip": "Controls\\ColorPalete.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAjAAAA",
+              "ViewState": "AQIAAC8AAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-24T18:38:30.45Z",
               "EditorCaption": ""
@@ -61,26 +92,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ColorPalete.cs [Design]",
-              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPalete.cs",
-              "RelativeDocumentMoniker": "Controls\\ColorPalete.cs",
-              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPalete.cs [Design]",
-              "RelativeToolTip": "Controls\\ColorPalete.cs [Design]",
+              "Title": "ColorPaleteItem.cs",
+              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPaleteItem.cs",
+              "RelativeDocumentMoniker": "Controls\\ColorPaleteItem.cs",
+              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPaleteItem.cs",
+              "RelativeToolTip": "Controls\\ColorPaleteItem.cs",
+              "ViewState": "AQIAADEAAAAAAAAAAAAAAEgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T17:49:08.363Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainForm.cs",
-              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
-              "RelativeDocumentMoniker": "MainForm.cs",
-              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
-              "RelativeToolTip": "MainForm.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACwAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-24T17:15:36.586Z",
+              "WhenOpened": "2024-10-25T09:31:13.42Z",
               "EditorCaption": ""
             }
           ]

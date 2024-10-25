@@ -1,6 +1,6 @@
 ﻿namespace Paint.Controls
 {
-    partial class ColorPalete
+    partial class CurrentColorDisplay
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             SuspendLayout();
             // 
-            // ColorPalete
+            // CurrentColorDisplay
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "ColorPalete";
-            Size = new Size(75, 242);
-            Paint += ColorPalete_Paint;
+            Name = "CurrentColorDisplay";
+            Size = new Size(72, 72);
+            Paint += CurrentColorDisplay_Paint;
             ResumeLayout(false);
         }
 

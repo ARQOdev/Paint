@@ -36,6 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Name = "ColorPaleteItem";
             Size = new Size(24, 24);
+            Click += ColorPaleteItem_Click;
             Paint += ColorPaleteItem_Paint;
             ResumeLayout(false);
         }

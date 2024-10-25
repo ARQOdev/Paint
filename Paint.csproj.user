@@ -7,6 +7,9 @@
     <Compile Update="Controls\ColorPaleteItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Controls\CurrentColorDisplay.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

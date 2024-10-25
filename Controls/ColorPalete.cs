@@ -33,18 +33,45 @@ namespace Paint.Controls
                 Color.Orange,
                 Color.Pink,
                 Color.Purple,
+                Color.Brown,//
+                Color.Black,
+                Color.White,
+                Color.Red,
+                Color.Green,
+                Color.Blue,
+                Color.Yellow,
+                Color.Orange,
+                Color.Pink,
+                Color.Purple,
+                Color.Brown,//
+                Color.Black,
+                Color.White,
+                Color.Red,
+                Color.Green,
+                Color.Blue,
+                Color.Yellow,
+                Color.Orange,
+                Color.Pink,
+                Color.Purple,
                 Color.Brown
             };
-            ItemCount = 10;
+            ItemCount = 30;
+            int j = 0;
             for (int i = 0; i < ItemCount; i++)
             {
+                if (j == 10)
+                    j = 0;
+
                 ColorPaleteItem item = new ColorPaleteItem();
                 item.Size = new Size(24, 24);
                 if (i < colors.Count)
+                {
                     item.Color = colors[i];
+                }
                 this.Controls.Add(item);
-                item.Location = new Point(0, i * item.Height + i);
+                item.Location = new Point(i / 10 * 24 + i / 10, j * item.Height + j);
                 palete.Add(item);
+                j++;
             }
         }
 

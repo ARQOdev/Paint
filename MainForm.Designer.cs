@@ -81,7 +81,7 @@
             pbCanvas.Dock = DockStyle.Fill;
             pbCanvas.Location = new Point(0, 53);
             pbCanvas.Name = "pbCanvas";
-            pbCanvas.Size = new Size(708, 375);
+            pbCanvas.Size = new Size(712, 375);
             pbCanvas.TabIndex = 3;
             pbCanvas.TabStop = false;
             pbCanvas.MouseDown += pbCanvas_MouseDown;
@@ -92,16 +92,18 @@
             // 
             pnlColorPalete.Controls.Add(colorPalete1);
             pnlColorPalete.Dock = DockStyle.Right;
-            pnlColorPalete.Location = new Point(708, 53);
+            pnlColorPalete.Location = new Point(712, 53);
             pnlColorPalete.Name = "pnlColorPalete";
-            pnlColorPalete.Size = new Size(92, 375);
+            pnlColorPalete.Size = new Size(88, 375);
             pnlColorPalete.TabIndex = 4;
+            pnlColorPalete.Paint += pnlColorPalete_Paint;
             // 
             // colorPalete1
             // 
-            colorPalete1.Location = new Point(27, 23);
+            colorPalete1.ItemCount = 30;
+            colorPalete1.Location = new Point(6, 120);
             colorPalete1.Name = "colorPalete1";
-            colorPalete1.Size = new Size(32, 302);
+            colorPalete1.Size = new Size(76, 252);
             colorPalete1.TabIndex = 0;
             // 
             // MainForm
