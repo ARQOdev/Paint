@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuStrip1 = new MenuStrip();
             MenuFile = new ToolStripMenuItem();
+            editToolStripMenuItem = new ToolStripMenuItem();
+            canvasSizeToolStripMenuItem = new ToolStripMenuItem();
             MainToolBar = new ToolStrip();
             StatusBar = new StatusStrip();
             pbCanvas = new PictureBox();
             pnlColorPalete = new Panel();
             UserPalete = new Controls.ColorPalete();
-            editToolStripMenuItem = new ToolStripMenuItem();
-            canvasSizeToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCanvas).BeginInit();
             pnlColorPalete.SuspendLayout();
@@ -59,6 +59,19 @@
             MenuFile.Size = new Size(46, 24);
             MenuFile.Text = "File";
             // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { canvasSizeToolStripMenuItem });
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new Size(49, 24);
+            editToolStripMenuItem.Text = "Edit";
+            // 
+            // canvasSizeToolStripMenuItem
+            // 
+            canvasSizeToolStripMenuItem.Name = "canvasSizeToolStripMenuItem";
+            canvasSizeToolStripMenuItem.Size = new Size(169, 26);
+            canvasSizeToolStripMenuItem.Text = "Canvas Size";
+            // 
             // MainToolBar
             // 
             MainToolBar.ImageScalingSize = new Size(20, 20);
@@ -71,9 +84,9 @@
             // StatusBar
             // 
             StatusBar.ImageScalingSize = new Size(20, 20);
-            StatusBar.Location = new Point(0, 428);
+            StatusBar.Location = new Point(0, 426);
             StatusBar.Name = "StatusBar";
-            StatusBar.Size = new Size(800, 22);
+            StatusBar.Size = new Size(800, 24);
             StatusBar.TabIndex = 2;
             StatusBar.Text = "statusStrip1";
             // 
@@ -83,10 +96,12 @@
             pbCanvas.Dock = DockStyle.Fill;
             pbCanvas.Location = new Point(0, 53);
             pbCanvas.Name = "pbCanvas";
-            pbCanvas.Size = new Size(712, 375);
+            pbCanvas.Size = new Size(712, 373);
             pbCanvas.TabIndex = 3;
             pbCanvas.TabStop = false;
+            pbCanvas.Paint += pbCanvas_Paint;
             pbCanvas.MouseDown += pbCanvas_MouseDown;
+            pbCanvas.MouseHover += pbCanvas_MouseHover;
             pbCanvas.MouseMove += pbCanvas_MouseMove;
             pbCanvas.MouseUp += pbCanvas_MouseUp;
             // 
@@ -96,9 +111,8 @@
             pnlColorPalete.Dock = DockStyle.Right;
             pnlColorPalete.Location = new Point(712, 53);
             pnlColorPalete.Name = "pnlColorPalete";
-            pnlColorPalete.Size = new Size(88, 375);
+            pnlColorPalete.Size = new Size(88, 373);
             pnlColorPalete.TabIndex = 4;
-            pnlColorPalete.Paint += pnlColorPalete_Paint;
             // 
             // UserPalete
             // 
@@ -107,19 +121,6 @@
             UserPalete.Name = "UserPalete";
             UserPalete.Size = new Size(76, 369);
             UserPalete.TabIndex = 0;
-            // 
-            // editToolStripMenuItem
-            // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { canvasSizeToolStripMenuItem });
-            editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(49, 24);
-            editToolStripMenuItem.Text = "Edit";
-            // 
-            // canvasSizeToolStripMenuItem
-            // 
-            canvasSizeToolStripMenuItem.Name = "canvasSizeToolStripMenuItem";
-            canvasSizeToolStripMenuItem.Size = new Size(224, 26);
-            canvasSizeToolStripMenuItem.Text = "Canvas Size";
             // 
             // MainForm
             // 
@@ -135,6 +136,7 @@
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Paint";
+            WindowState = FormWindowState.Maximized;
             FormClosing += MainForm_FormClosing;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
