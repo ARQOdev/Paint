@@ -83,7 +83,11 @@ namespace Paint
                 return;
             }
 
-            drawing = true;
+            if (new Rectangle(new Point(0, 0), canvas_bitmap.Size).Contains(new Point(e.X, e.Y)))
+            {
+                drawing = true;
+            }
+
             prev_point = e.Location;
         }
 

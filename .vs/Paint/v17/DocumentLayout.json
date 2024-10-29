@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\dialogs\\resizeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:dialogs\\resizeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\dialogs\\resizeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:dialogs\\resizeform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 334,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -42,20 +42,22 @@
               "RelativeToolTip": "MainForm.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-24T16:58:20.776Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",
               "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
               "RelativeToolTip": "MainForm.cs",
-              "ViewState": "AQIAANYAAAAAAAAAAAAAAOoAAAAoAAAA",
+              "ViewState": "AQIAAEQAAAAAAAAAAAAmwFkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-24T17:15:36.586Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
@@ -67,7 +69,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ResizeForm.cs [Design]",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Dialogs\\ResizeForm.cs",
               "RelativeDocumentMoniker": "Dialogs\\ResizeForm.cs",
@@ -79,13 +81,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "ResizeForm.cs",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Dialogs\\ResizeForm.cs",
               "RelativeDocumentMoniker": "Dialogs\\ResizeForm.cs",
               "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Dialogs\\ResizeForm.cs",
               "RelativeToolTip": "Dialogs\\ResizeForm.cs",
-              "ViewState": "AQIAAFEAAAAAAAAAAAAAAGQAAAAvAAAA",
+              "ViewState": "AQIAAFUAAAAAAAAAAAAAAHoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-28T20:11:42.14Z",
               "EditorCaption": ""
