@@ -32,7 +32,7 @@
             menuStrip1 = new MenuStrip();
             MenuFile = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
-            canvasSizeToolStripMenuItem = new ToolStripMenuItem();
+            menuResize = new ToolStripMenuItem();
             MainToolBar = new ToolStrip();
             StatusBar = new StatusStrip();
             pbCanvas = new PictureBox();
@@ -61,16 +61,17 @@
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { canvasSizeToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { menuResize });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(49, 24);
             editToolStripMenuItem.Text = "Edit";
             // 
-            // canvasSizeToolStripMenuItem
+            // menuResize
             // 
-            canvasSizeToolStripMenuItem.Name = "canvasSizeToolStripMenuItem";
-            canvasSizeToolStripMenuItem.Size = new Size(169, 26);
-            canvasSizeToolStripMenuItem.Text = "Canvas Size";
+            menuResize.Name = "menuResize";
+            menuResize.Size = new Size(224, 26);
+            menuResize.Text = "სურათის ზომა";
+            menuResize.Click += menuResize_Click;
             // 
             // MainToolBar
             // 
@@ -84,9 +85,9 @@
             // StatusBar
             // 
             StatusBar.ImageScalingSize = new Size(20, 20);
-            StatusBar.Location = new Point(0, 426);
+            StatusBar.Location = new Point(0, 428);
             StatusBar.Name = "StatusBar";
-            StatusBar.Size = new Size(800, 24);
+            StatusBar.Size = new Size(800, 22);
             StatusBar.TabIndex = 2;
             StatusBar.Text = "statusStrip1";
             // 
@@ -96,12 +97,11 @@
             pbCanvas.Dock = DockStyle.Fill;
             pbCanvas.Location = new Point(0, 53);
             pbCanvas.Name = "pbCanvas";
-            pbCanvas.Size = new Size(712, 373);
+            pbCanvas.Size = new Size(712, 375);
             pbCanvas.TabIndex = 3;
             pbCanvas.TabStop = false;
             pbCanvas.Paint += pbCanvas_Paint;
             pbCanvas.MouseDown += pbCanvas_MouseDown;
-            pbCanvas.MouseHover += pbCanvas_MouseHover;
             pbCanvas.MouseMove += pbCanvas_MouseMove;
             pbCanvas.MouseUp += pbCanvas_MouseUp;
             // 
@@ -111,7 +111,7 @@
             pnlColorPalete.Dock = DockStyle.Right;
             pnlColorPalete.Location = new Point(712, 53);
             pnlColorPalete.Name = "pnlColorPalete";
-            pnlColorPalete.Size = new Size(88, 373);
+            pnlColorPalete.Size = new Size(88, 375);
             pnlColorPalete.TabIndex = 4;
             // 
             // UserPalete
@@ -156,6 +156,6 @@
         private Panel pnlColorPalete;
         private Controls.ColorPalete UserPalete;
         private ToolStripMenuItem editToolStripMenuItem;
-        private ToolStripMenuItem canvasSizeToolStripMenuItem;
+        private ToolStripMenuItem menuResize;
     }
 }

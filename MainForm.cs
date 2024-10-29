@@ -1,4 +1,5 @@
 ﻿using Paint.Controls;
+using Paint.Dialogs;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
@@ -118,8 +119,8 @@ namespace Paint
                 else
                     pbCanvas.Cursor = Cursors.Default;
             }
-            
-            switch(resizing)
+
+            switch (resizing)
             {
                 case "corner":
                     resize_rectangle.Width = e.X;
@@ -224,9 +225,19 @@ namespace Paint
 
         }
 
-        private void pbCanvas_MouseHover(object sender, EventArgs e)
+        private void menuResize_Click(object sender, EventArgs e)
         {
-            
+            ResizeForm form = new ResizeForm(canvas_bitmap.Size);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Size size = form.GetNewSize();
+                Bitmap temp = (Bitmap)canvas_bitmap.Clone();
+                canvas_bitmap.Dispose();
+                canvas_bitmap = new Bitmap(size.Width, size.Height);
+                InitCanvasGraphics();
+                canvas_graphics.DrawImage(temp, new Point(0, 0));
+                temp.Dispose();
+            }
         }
     }
 }

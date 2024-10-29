@@ -13,8 +13,4 @@
     <Content Include="app_icon.ico" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dialogs\" />
-  </ItemGroup>
-
 </Project>
