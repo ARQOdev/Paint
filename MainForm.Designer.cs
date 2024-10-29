@@ -49,7 +49,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { MenuFile, editToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 28);
+            menuStrip1.Size = new Size(1062, 28);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -69,7 +69,7 @@
             // menuResize
             // 
             menuResize.Name = "menuResize";
-            menuResize.Size = new Size(224, 26);
+            menuResize.Size = new Size(203, 26);
             menuResize.Text = "სურათის ზომა";
             menuResize.Click += menuResize_Click;
             // 
@@ -78,16 +78,16 @@
             MainToolBar.ImageScalingSize = new Size(20, 20);
             MainToolBar.Location = new Point(0, 28);
             MainToolBar.Name = "MainToolBar";
-            MainToolBar.Size = new Size(800, 25);
+            MainToolBar.Size = new Size(1062, 25);
             MainToolBar.TabIndex = 1;
             MainToolBar.Text = "toolStrip1";
             // 
             // StatusBar
             // 
             StatusBar.ImageScalingSize = new Size(20, 20);
-            StatusBar.Location = new Point(0, 428);
+            StatusBar.Location = new Point(0, 651);
             StatusBar.Name = "StatusBar";
-            StatusBar.Size = new Size(800, 22);
+            StatusBar.Size = new Size(1062, 22);
             StatusBar.TabIndex = 2;
             StatusBar.Text = "statusStrip1";
             // 
@@ -97,7 +97,7 @@
             pbCanvas.Dock = DockStyle.Fill;
             pbCanvas.Location = new Point(0, 53);
             pbCanvas.Name = "pbCanvas";
-            pbCanvas.Size = new Size(712, 375);
+            pbCanvas.Size = new Size(974, 598);
             pbCanvas.TabIndex = 3;
             pbCanvas.TabStop = false;
             pbCanvas.Paint += pbCanvas_Paint;
@@ -109,9 +109,9 @@
             // 
             pnlColorPalete.Controls.Add(UserPalete);
             pnlColorPalete.Dock = DockStyle.Right;
-            pnlColorPalete.Location = new Point(712, 53);
+            pnlColorPalete.Location = new Point(974, 53);
             pnlColorPalete.Name = "pnlColorPalete";
-            pnlColorPalete.Size = new Size(88, 375);
+            pnlColorPalete.Size = new Size(88, 598);
             pnlColorPalete.TabIndex = 4;
             // 
             // UserPalete
@@ -119,14 +119,14 @@
             UserPalete.ItemCount = 30;
             UserPalete.Location = new Point(6, 3);
             UserPalete.Name = "UserPalete";
-            UserPalete.Size = new Size(76, 369);
+            UserPalete.Size = new Size(76, 359);
             UserPalete.TabIndex = 0;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1062, 673);
             Controls.Add(pbCanvas);
             Controls.Add(pnlColorPalete);
             Controls.Add(StatusBar);

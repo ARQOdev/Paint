@@ -13,6 +13,7 @@ namespace Paint
     {
         private int default_width = 800;
         private int default_height = 600;
+        private int pen_size = 3;
         private bool drawing = false;
         private string resizing = "";
         private Point prev_point;
@@ -27,6 +28,31 @@ namespace Paint
             InitCanvasGraphics();
 
             SetDoubleBuffering(pbCanvas, true);
+
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(mainForm_KeyDown);
+        }
+
+        private void mainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.OemCloseBrackets)
+            {
+                if (pen_size == 100)
+                    pen_size = 1;
+                else
+                    pen_size++;
+
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.OemOpenBrackets)
+            {
+                if (pen_size == 1)
+                    pen_size = 100;
+                else
+                    pen_size--;
+
+                e.Handled = true;
+            }
         }
 
         private void InitCanvasGraphics()
@@ -98,7 +124,7 @@ namespace Paint
                 Color color = UserPalete.PaleteForeColor;
                 if (e.Button == MouseButtons.Right)
                     color = UserPalete.PaleteBackColor;
-                using (Pen pen = new Pen(color, 2))
+                using (Pen pen = new Pen(color, pen_size))
                 {
                     canvas_graphics.DrawLine(pen, prev_point, e.Location);
                 }
