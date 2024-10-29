@@ -28,31 +28,6 @@ namespace Paint
             InitCanvasGraphics();
 
             SetDoubleBuffering(pbCanvas, true);
-
-            this.KeyPreview = true;
-            this.KeyDown += new KeyEventHandler(mainForm_KeyDown);
-        }
-
-        private void mainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.OemCloseBrackets)
-            {
-                if (pen_size == 100)
-                    pen_size = 1;
-                else
-                    pen_size++;
-
-                e.Handled = true;
-            }
-            else if (e.KeyCode == Keys.OemOpenBrackets)
-            {
-                if (pen_size == 1)
-                    pen_size = 100;
-                else
-                    pen_size--;
-
-                e.Handled = true;
-            }
         }
 
         private void InitCanvasGraphics()
@@ -115,6 +90,14 @@ namespace Paint
             }
 
             prev_point = e.Location;
+            Color color = UserPalete.PaleteForeColor;
+            if (e.Button == MouseButtons.Right)
+                color = UserPalete.PaleteBackColor;
+            using (Brush brush = new SolidBrush(color))
+            {
+                Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                canvas_graphics.FillEllipse(brush, circle_rectangle);
+            }
         }
 
         private void pbCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -124,9 +107,13 @@ namespace Paint
                 Color color = UserPalete.PaleteForeColor;
                 if (e.Button == MouseButtons.Right)
                     color = UserPalete.PaleteBackColor;
+
                 using (Pen pen = new Pen(color, pen_size))
+                using (Brush brush = new SolidBrush(color))
                 {
                     canvas_graphics.DrawLine(pen, prev_point, e.Location);
+                    Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                    canvas_graphics.FillEllipse(brush, circle_rectangle);
                 }
                 prev_point = e.Location;
                 pbCanvas.Invalidate();
@@ -267,6 +254,28 @@ namespace Paint
                 InitCanvasGraphics();
                 canvas_graphics.DrawImage(temp, new Point(0, 0));
                 temp.Dispose();
+            }
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.OemCloseBrackets)
+            {
+                if (pen_size == 100)
+                    pen_size = 1;
+                else
+                    pen_size++;
+
+                e.Handled = true;
+            }
+            else if (e.KeyCode == Keys.OemOpenBrackets)
+            {
+                if (pen_size == 1)
+                    pen_size = 100;
+                else
+                    pen_size--;
+
+                e.Handled = true;
             }
         }
     }

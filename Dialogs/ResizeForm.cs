@@ -154,6 +154,5 @@ namespace Paint.Dialogs
 
             return new Size(w, h);
         }
-
     }
 }
