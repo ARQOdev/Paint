@@ -124,6 +124,7 @@ namespace MyPaint
             menuClose.Name = "menuClose";
             menuClose.Size = new Size(308, 26);
             menuClose.Text = "დახურვა";
+            menuClose.Click += menuClose_Click;
             // 
             // editToolStripMenuItem
             // 

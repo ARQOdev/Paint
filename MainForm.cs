@@ -137,7 +137,7 @@ namespace MyPaint
                 return;
             }
 
-            
+
 
             Rectangle corner_rectangle = new Rectangle(canvas_bitmap.Width + 1, canvas_bitmap.Height + 1, 7, 7);
             Rectangle right_rectangle = new Rectangle(canvas_bitmap.Width + 1, (canvas_bitmap.Height - 7) / 2, 7, 7);
@@ -297,6 +297,33 @@ namespace MyPaint
             }
         }
 
+        private Cursor DrawCursor(int size)
+        {
+            size += size % 2 == 0 ? 1 : 0;
+            Bitmap cursor_bitmap = size > 15 ? new Bitmap(size + 2, size + 2) : new Bitmap(17, 17);
+            using (Graphics cursor_graphics = Graphics.FromImage(cursor_bitmap))
+            {
+                cursor_graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                using (Pen pen = new Pen(Color.Black, 1))
+                {
+                    float half = cursor_bitmap.Height / 2;
+                    cursor_graphics.DrawLine(pen, half, half - 4, half, half - 7);
+                    cursor_graphics.DrawLine(pen, half, half + 4, half, half + 7);
+                    cursor_graphics.DrawLine(pen, half - 4, half, half - 7, half);
+                    cursor_graphics.DrawLine(pen, half + 4, half, half + 7, half);
+                    cursor_graphics.FillEllipse(Brushes.Black, new RectangleF(half, half, 1, 1));
+                    cursor_graphics.DrawEllipse(pen, new RectangleF(half - size / 2, half - size / 2, size, size));
+                }
+            }
+            IntPtr ptr = cursor_bitmap.GetHicon();
+            Icon icon = Icon.FromHandle(ptr);
+            Cursor cursor = new Cursor(ptr);
+            cursor_bitmap.Dispose();
+            icon.Dispose();
+
+            return cursor;
+        }
+
         private void menuOpen_Click(object sender, EventArgs e)
         {
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -391,6 +418,11 @@ namespace MyPaint
         private void btnSave_Click(object sender, EventArgs e)
         {
             menuSave.PerformClick();
+        }
+
+        private void menuClose_Click(object sender, EventArgs e)
+        {
+            this.Cursor = DrawCursor(15);
         }
     }
 }
