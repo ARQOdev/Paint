@@ -18,3 +18,4 @@ C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\Paint.Controls.Colo
 C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\Paint.Controls.ColorPaleteItem.resources
 C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\Paint.sourcelink.json
 C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\Paint.Dialogs.ResizeForm.resources
+C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\Paint.Properties.Resources.resources

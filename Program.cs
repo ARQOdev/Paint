@@ -1,4 +1,4 @@
-namespace Paint
+namespace MyPaint
 {
     internal static class Program
     {

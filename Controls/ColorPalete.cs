@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint.Controls
+namespace MyPaint.Controls
 {
     public partial class ColorPalete : UserControl
     {
@@ -120,5 +120,14 @@ namespace Paint.Controls
                 BackColorItem.Invalidate();
             }
         }
+
+        public void ResetPalete()
+        {
+            ForeColorItem.Color = Color.Black;
+            BackColorItem.Color = Color.White;
+            ForeColorItem.Invalidate();
+            BackColorItem.Invalidate();
+        }
+
     }
 }

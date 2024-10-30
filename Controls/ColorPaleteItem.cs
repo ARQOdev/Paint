@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint.Controls
+namespace MyPaint.Controls
 {
     public partial class ColorPaleteItem : UserControl
     {

@@ -1,4 +1,4 @@
-﻿namespace Paint.Controls
+﻿namespace MyPaint.Controls
 {
     partial class ColorPaleteItem
     {

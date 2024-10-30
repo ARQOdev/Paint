@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Paint.csproj",
-      "projectName": "Paint",
-      "projectPath": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Paint.csproj",
+      "projectUniqueName": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MyPaint.csproj",
+      "projectName": "MyPaint",
+      "projectPath": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MyPaint.csproj",
       "packagesPath": "C:\\Users\\anr9c\\.nuget\\packages\\",
       "outputPath": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\obj\\",
       "projectStyle": "PackageReference",

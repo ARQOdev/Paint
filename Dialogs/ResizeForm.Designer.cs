@@ -1,4 +1,4 @@
-﻿namespace Paint.Dialogs
+﻿namespace MyPaint.Dialogs
 {
     partial class ResizeForm
     {

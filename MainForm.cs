@@ -1,13 +1,13 @@
-﻿using Paint.Controls;
-using Paint.Dialogs;
+﻿using MyPaint.Controls;
+using MyPaint.Dialogs;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Diagnostics;
 
-
-namespace Paint
+namespace MyPaint
 {
     public partial class MainForm : Form
     {
@@ -21,6 +21,11 @@ namespace Paint
         private Graphics canvas_graphics;
         private Rectangle resize_rectangle = new Rectangle(-1, -1, -1, -1);
 
+        private OpenFileDialog ofd;
+        private SaveFileDialog sfd;
+        private string image_path = "";
+        System.Drawing.Imaging.ImageFormat image_format = System.Drawing.Imaging.ImageFormat.Png;
+
         public MainForm()
         {
             InitializeComponent();
@@ -28,12 +33,23 @@ namespace Paint
             InitCanvasGraphics();
 
             SetDoubleBuffering(pbCanvas, true);
+
+            ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            ofd.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp|All Files|*.*";
+            ofd.RestoreDirectory = true;
+
+            sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            sfd.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp";
+            sfd.RestoreDirectory = true;
         }
 
-        private void InitCanvasGraphics()
+        private void InitCanvasGraphics(bool clear = true)
         {
             canvas_graphics = Graphics.FromImage(canvas_bitmap);
-            canvas_graphics.Clear(UserPalete.PaleteBackColor);
+            if (clear)
+                canvas_graphics.Clear(UserPalete.PaleteBackColor);
 
             // ხატვის ხარისხის დაყენება
             canvas_graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -120,6 +136,8 @@ namespace Paint
 
                 return;
             }
+
+            
 
             Rectangle corner_rectangle = new Rectangle(canvas_bitmap.Width + 1, canvas_bitmap.Height + 1, 7, 7);
             Rectangle right_rectangle = new Rectangle(canvas_bitmap.Width + 1, (canvas_bitmap.Height - 7) / 2, 7, 7);
@@ -277,6 +295,102 @@ namespace Paint
 
                 e.Handled = true;
             }
+        }
+
+        private void menuOpen_Click(object sender, EventArgs e)
+        {
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                image_path = ofd.FileName;
+                switch (Path.GetExtension(image_path))
+                {
+                    case "jpg":
+                    case "jpeg":
+                        image_format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                        break;
+                    case "bmp":
+                        image_format = System.Drawing.Imaging.ImageFormat.Bmp;
+                        break;
+                    default:
+                        image_format = System.Drawing.Imaging.ImageFormat.Png;
+                        break;
+                }
+                ofd.InitialDirectory = Path.GetDirectoryName(image_path);
+                canvas_bitmap.Dispose();
+                canvas_bitmap = (Bitmap)Bitmap.FromFile(image_path);
+                InitCanvasGraphics(false);
+            }
+        }
+
+        private void menuSave_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(image_path))
+            {
+                canvas_bitmap.Save(image_path, image_format);
+                return;
+            }
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                switch (sfd.FilterIndex)
+                {
+                    case 1:
+                        image_format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                        break;
+                    case 2:
+                        image_format = System.Drawing.Imaging.ImageFormat.Bmp;
+                        break;
+                    default:
+                        image_format = System.Drawing.Imaging.ImageFormat.Png;
+                        break;
+
+                }
+                image_path = sfd.FileName;
+                canvas_bitmap.Save(image_path, image_format);
+            }
+        }
+
+        private void menuSaveAs_Click(object sender, EventArgs e)
+        {
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                switch (sfd.FilterIndex)
+                {
+                    case 1:
+                        image_format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                        break;
+                    case 2:
+                        image_format = System.Drawing.Imaging.ImageFormat.Bmp;
+                        break;
+                    default:
+                        image_format = System.Drawing.Imaging.ImageFormat.Png;
+                        break;
+                }
+                image_path = sfd.FileName;
+                canvas_bitmap.Save(image_path, image_format);
+            }
+        }
+
+        private void menuNewFile_Click(object sender, EventArgs e)
+        {
+            UserPalete.ResetPalete();
+            canvas_graphics.Clear(UserPalete.PaleteBackColor);
+            pbCanvas.Invalidate();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            menuNewFile.PerformClick();
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            menuOpen.PerformClick();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            menuSave.PerformClick();
         }
     }
 }

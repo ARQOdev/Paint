@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Paint.Dialogs
+namespace MyPaint.Dialogs
 {
     public partial class ResizeForm : Form
     {
