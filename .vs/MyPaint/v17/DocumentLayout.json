@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\controls\\colorpalete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|Paint.csproj|solutionrelative:controls\\colorpalete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\controls\\colorpalete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:controls\\colorpalete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:mainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\helpers\\cursormanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:helpers\\cursormanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +26,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 334,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "MainForm.cs [Design]",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",
@@ -43,16 +43,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainForm.cs",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",
               "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
               "RelativeToolTip": "MainForm.cs",
-              "ViewState": "AQIAAO0AAAAAAAAAAAAAAKcBAAAJAAAA",
+              "ViewState": "AQIAAJYBAAAAAAAAAAAcwKsBAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-24T17:15:36.586Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainForm.Designer.cs",
+              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.Designer.cs",
+              "RelativeDocumentMoniker": "MainForm.Designer.cs",
+              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.Designer.cs",
+              "RelativeToolTip": "MainForm.Designer.cs",
+              "ViewState": "AQIAAGAAAAAAAAAAAAAwwHAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-31T16:20:20.043Z",
               "EditorCaption": ""
             },
             {
@@ -66,26 +79,15 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ColorPalete.cs",
-              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPalete.cs",
-              "RelativeDocumentMoniker": "Controls\\ColorPalete.cs",
-              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPalete.cs",
-              "RelativeToolTip": "Controls\\ColorPalete.cs",
-              "ViewState": "AQIAAGcAAAAAAAAAAAAYwHUAAAANAAAA",
+              "Title": "CursorManager.cs",
+              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Helpers\\CursorManager.cs",
+              "RelativeDocumentMoniker": "Helpers\\CursorManager.cs",
+              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Helpers\\CursorManager.cs",
+              "RelativeToolTip": "Helpers\\CursorManager.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAA6wBEAAABjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T18:58:01.737Z",
+              "WhenOpened": "2024-10-31T15:44:36.274Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ColorPalete.cs [Design]",
-              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPalete.cs",
-              "RelativeDocumentMoniker": "Controls\\ColorPalete.cs",
-              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ColorPalete.cs [Design]",
-              "RelativeToolTip": "Controls\\ColorPalete.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-30T18:57:57.718Z"
             }
           ]
         },

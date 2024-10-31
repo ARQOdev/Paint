@@ -6,6 +6,7 @@ using System.Drawing.Text;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Diagnostics;
+using MyPaint.Helpers;
 
 namespace MyPaint
 {
@@ -43,6 +44,8 @@ namespace MyPaint
             sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             sfd.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp";
             sfd.RestoreDirectory = true;
+
+            CursorManager.CreateCursor(pen_size);
         }
 
         private void InitCanvasGraphics(bool clear = true)
@@ -115,9 +118,19 @@ namespace MyPaint
                 canvas_graphics.FillEllipse(brush, circle_rectangle);
             }
         }
-
+        
         private void pbCanvas_MouseMove(object sender, MouseEventArgs e)
         {
+            Rectangle bitmap_rectangle = new Rectangle(0, 0, canvas_bitmap.Width, canvas_bitmap.Height);
+            if (bitmap_rectangle.Contains(e.Location))
+            {
+                pbCanvas.Cursor = CursorManager.CurrentCursor;
+            }
+            else
+            {
+                pbCanvas.Cursor = Cursors.Default;
+            }
+
             if (drawing)
             {
                 Color color = UserPalete.PaleteForeColor;
@@ -137,8 +150,6 @@ namespace MyPaint
                 return;
             }
 
-
-
             Rectangle corner_rectangle = new Rectangle(canvas_bitmap.Width + 1, canvas_bitmap.Height + 1, 7, 7);
             Rectangle right_rectangle = new Rectangle(canvas_bitmap.Width + 1, (canvas_bitmap.Height - 7) / 2, 7, 7);
             Rectangle bottom_rectangle = new Rectangle((canvas_bitmap.Width - 7) / 2, canvas_bitmap.Height + 1, 7, 7);
@@ -151,7 +162,7 @@ namespace MyPaint
                     pbCanvas.Cursor = Cursors.SizeWE;
                 else if (bottom_rectangle.Contains(e.Location))
                     pbCanvas.Cursor = Cursors.SizeNS;
-                else
+                else if (!bitmap_rectangle.Contains(e.Location))
                     pbCanvas.Cursor = Cursors.Default;
             }
 
@@ -284,6 +295,13 @@ namespace MyPaint
                 else
                     pen_size++;
 
+                CursorManager.CreateCursor(pen_size);
+                Rectangle bitmap_rectangle = new Rectangle(0, 0, canvas_bitmap.Width, canvas_bitmap.Height);
+                if (bitmap_rectangle.Contains(pbCanvas.PointToClient(Cursor.Position)))
+                {
+                    pbCanvas.Cursor = CursorManager.CurrentCursor;
+                }
+
                 e.Handled = true;
             }
             else if (e.KeyCode == Keys.OemOpenBrackets)
@@ -293,41 +311,24 @@ namespace MyPaint
                 else
                     pen_size--;
 
+                CursorManager.CreateCursor(pen_size);
+                Rectangle bitmap_rectangle = new Rectangle(0, 0, canvas_bitmap.Width, canvas_bitmap.Height);
+                if (bitmap_rectangle.Contains(pbCanvas.PointToClient(Cursor.Position)))
+                {
+                    pbCanvas.Cursor = CursorManager.CurrentCursor;
+                }
+
                 e.Handled = true;
             }
-        }
-
-        private Cursor DrawCursor(int size)
-        {
-            size += size % 2 == 0 ? 1 : 0;
-            Bitmap cursor_bitmap = size > 15 ? new Bitmap(size + 2, size + 2) : new Bitmap(17, 17);
-            using (Graphics cursor_graphics = Graphics.FromImage(cursor_bitmap))
-            {
-                cursor_graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                using (Pen pen = new Pen(Color.Black, 1))
-                {
-                    float half = cursor_bitmap.Height / 2;
-                    cursor_graphics.DrawLine(pen, half, half - 4, half, half - 7);
-                    cursor_graphics.DrawLine(pen, half, half + 4, half, half + 7);
-                    cursor_graphics.DrawLine(pen, half - 4, half, half - 7, half);
-                    cursor_graphics.DrawLine(pen, half + 4, half, half + 7, half);
-                    cursor_graphics.FillEllipse(Brushes.Black, new RectangleF(half, half, 1, 1));
-                    cursor_graphics.DrawEllipse(pen, new RectangleF(half - size / 2, half - size / 2, size, size));
-                }
-            }
-            IntPtr ptr = cursor_bitmap.GetHicon();
-            Icon icon = Icon.FromHandle(ptr);
-            Cursor cursor = new Cursor(ptr);
-            cursor_bitmap.Dispose();
-            icon.Dispose();
-
-            return cursor;
         }
 
         private void menuOpen_Click(object sender, EventArgs e)
         {
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                pen_size = 3;
+                CursorManager.CreateCursor(pen_size);
+
                 image_path = ofd.FileName;
                 switch (Path.GetExtension(image_path))
                 {
@@ -400,6 +401,9 @@ namespace MyPaint
 
         private void menuNewFile_Click(object sender, EventArgs e)
         {
+            pen_size = 3;
+            CursorManager.CreateCursor(pen_size);
+
             UserPalete.ResetPalete();
             canvas_graphics.Clear(UserPalete.PaleteBackColor);
             pbCanvas.Invalidate();
@@ -422,7 +426,7 @@ namespace MyPaint
 
         private void menuClose_Click(object sender, EventArgs e)
         {
-            this.Cursor = DrawCursor(15);
+            Application.Exit();
         }
     }
 }
