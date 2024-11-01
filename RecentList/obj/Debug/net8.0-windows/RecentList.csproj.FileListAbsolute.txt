@@ -1,0 +1,11 @@
+C:\Anri\PROJECTS\Paint c# app\RecentList\bin\Debug\net8.0-windows\RecentList.deps.json
+C:\Anri\PROJECTS\Paint c# app\RecentList\bin\Debug\net8.0-windows\RecentList.dll
+C:\Anri\PROJECTS\Paint c# app\RecentList\bin\Debug\net8.0-windows\RecentList.pdb
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.GeneratedMSBuildEditorConfig.editorconfig
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.AssemblyInfoInputs.cache
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.AssemblyInfo.cs
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.csproj.CoreCompileInputs.cache
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.dll
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\refint\RecentList.dll
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.pdb
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\ref\RecentList.dll
