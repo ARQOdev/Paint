@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using System.Diagnostics;
 using MyPaint.Helpers;
+using RecentList;
 
 namespace MyPaint
 {
@@ -46,6 +47,34 @@ namespace MyPaint
             sfd.RestoreDirectory = true;
 
             CursorManager.CreateCursor(pen_size);
+
+            RecentList.RecentList.Init(Assembly.GetExecutingAssembly().GetName().Name!, menuRecent);
+
+            Application.ApplicationExit += OnApplicationExit;
+            RecentList.RecentList.RecentItemClicked += RecentList_RecentItemClicked;
+        }
+
+        private void RecentList_RecentItemClicked(object sender, RecentItemClickedEventArgs e)
+        {
+            image_path = e.FilePath;
+            switch (Path.GetExtension(image_path))
+            {
+                case "jpg":
+                case "jpeg":
+                    image_format = System.Drawing.Imaging.ImageFormat.Jpeg;
+                    break;
+                case "bmp":
+                    image_format = System.Drawing.Imaging.ImageFormat.Bmp;
+                    break;
+                default:
+                    image_format = System.Drawing.Imaging.ImageFormat.Png;
+                    break;
+            }
+            canvas_bitmap.Dispose();
+            canvas_bitmap = (Bitmap)Bitmap.FromFile(image_path);
+            InitCanvasGraphics(false);
+
+            RecentList.RecentList.MoveToHead(image_path);
         }
 
         private void InitCanvasGraphics(bool clear = true)
@@ -347,6 +376,9 @@ namespace MyPaint
                 canvas_bitmap.Dispose();
                 canvas_bitmap = (Bitmap)Bitmap.FromFile(image_path);
                 InitCanvasGraphics(false);
+
+                RecentList.RecentList.AddFile(ofd.FileName);
+
             }
         }
 
@@ -427,6 +459,11 @@ namespace MyPaint
         private void menuClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void OnApplicationExit(object? sender, EventArgs e)
+        {
+            RecentList.RecentList.Save();
         }
     }
 }

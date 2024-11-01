@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyPaint", "MyPaint.csproj", "{025189AD-A1BF-433B-81D2-2D6496709CE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecentList", "..\RecentList\RecentList.csproj", "{C4D4C018-1CCC-4167-9D99-D519F620D6DC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{025189AD-A1BF-433B-81D2-2D6496709CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{025189AD-A1BF-433B-81D2-2D6496709CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{025189AD-A1BF-433B-81D2-2D6496709CE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4D4C018-1CCC-4167-9D99-D519F620D6DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4D4C018-1CCC-4167-9D99-D519F620D6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4D4C018-1CCC-4167-9D99-D519F620D6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4D4C018-1CCC-4167-9D99-D519F620D6DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
