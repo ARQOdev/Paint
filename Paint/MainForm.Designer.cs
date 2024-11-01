@@ -50,10 +50,13 @@ namespace MyPaint
             pbCanvas = new PictureBox();
             pnlColorPalete = new Panel();
             UserPalete = new Controls.ColorPalete();
+            panel1 = new Panel();
+            toolBar1 = new Controls.ToolBar();
             menuStrip1.SuspendLayout();
             MainToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCanvas).BeginInit();
             pnlColorPalete.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -193,9 +196,9 @@ namespace MyPaint
             // 
             pbCanvas.BackColor = Color.FromArgb(203, 213, 228);
             pbCanvas.Dock = DockStyle.Fill;
-            pbCanvas.Location = new Point(0, 55);
+            pbCanvas.Location = new Point(34, 55);
             pbCanvas.Name = "pbCanvas";
-            pbCanvas.Size = new Size(883, 428);
+            pbCanvas.Size = new Size(849, 428);
             pbCanvas.TabIndex = 3;
             pbCanvas.TabStop = false;
             pbCanvas.Paint += pbCanvas_Paint;
@@ -220,12 +223,30 @@ namespace MyPaint
             UserPalete.Size = new Size(76, 359);
             UserPalete.TabIndex = 0;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(toolBar1);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 55);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(34, 428);
+            panel1.TabIndex = 5;
+            // 
+            // toolBar1
+            // 
+            toolBar1.Dock = DockStyle.Fill;
+            toolBar1.Location = new Point(0, 0);
+            toolBar1.Name = "toolBar1";
+            toolBar1.Size = new Size(34, 428);
+            toolBar1.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(971, 505);
             Controls.Add(pbCanvas);
+            Controls.Add(panel1);
             Controls.Add(pnlColorPalete);
             Controls.Add(StatusBar);
             Controls.Add(MainToolBar);
@@ -244,6 +265,7 @@ namespace MyPaint
             MainToolBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbCanvas).EndInit();
             pnlColorPalete.ResumeLayout(false);
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -269,5 +291,7 @@ namespace MyPaint
         private ToolStripButton btnOpen;
         private ToolStripButton btnSave;
         private ToolStripMenuItem menuNewFile;
+        private Panel panel1;
+        private Controls.ToolBar toolBar1;
     }
 }

@@ -63,6 +63,26 @@ namespace MyPaint.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap dropper_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("dropper_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap eraser_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("eraser_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap newDoc_24x24 {
             get {
                 object obj = ResourceManager.GetObject("newDoc_24x24", resourceCulture);
@@ -76,6 +96,26 @@ namespace MyPaint.Properties {
         internal static System.Drawing.Bitmap openFolder_24x24 {
             get {
                 object obj = ResourceManager.GetObject("openFolder_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap paintBucket_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("paintBucket_32x32", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pencil_32x32 {
+            get {
+                object obj = ResourceManager.GetObject("pencil_32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

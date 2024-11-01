@@ -7,6 +7,12 @@
     <Compile Update="Controls\ColorPaleteItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Controls\Tool.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Controls\ToolBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Dialogs\ResizeForm.cs">
       <SubType>Form</SubType>
     </Compile>

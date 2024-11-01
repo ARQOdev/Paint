@@ -9,3 +9,4 @@ C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.dll
 C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\refint\RecentList.dll
 C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.pdb
 C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\ref\RecentList.dll
+C:\Anri\PROJECTS\Paint c# app\RecentList\obj\Debug\net8.0-windows\RecentList.sourcelink.json

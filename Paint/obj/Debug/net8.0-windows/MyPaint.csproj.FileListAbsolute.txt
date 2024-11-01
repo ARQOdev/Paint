@@ -23,3 +23,5 @@ C:\Anri\PROJECTS\Paint c# app\Paint\bin\Debug\net8.0-windows\RecentList.dll
 C:\Anri\PROJECTS\Paint c# app\Paint\bin\Debug\net8.0-windows\RecentList.pdb
 C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.csproj.AssemblyReference.cache
 C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.csproj.Up2Date
+C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.Controls.ToolBar.resources
+C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.Controls.Tool.resources
