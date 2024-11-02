@@ -51,7 +51,7 @@ namespace MyPaint
             pnlColorPalete = new Panel();
             UserPalete = new Controls.ColorPalete();
             panel1 = new Panel();
-            toolBar1 = new Controls.ToolBar();
+            LeftToolBar = new Controls.ToolBar();
             menuStrip1.SuspendLayout();
             MainToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCanvas).BeginInit();
@@ -225,20 +225,20 @@ namespace MyPaint
             // 
             // panel1
             // 
-            panel1.Controls.Add(toolBar1);
+            panel1.Controls.Add(LeftToolBar);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 55);
             panel1.Name = "panel1";
             panel1.Size = new Size(34, 428);
             panel1.TabIndex = 5;
             // 
-            // toolBar1
+            // LeftToolBar
             // 
-            toolBar1.Dock = DockStyle.Fill;
-            toolBar1.Location = new Point(0, 0);
-            toolBar1.Name = "toolBar1";
-            toolBar1.Size = new Size(34, 428);
-            toolBar1.TabIndex = 0;
+            LeftToolBar.Dock = DockStyle.Fill;
+            LeftToolBar.Location = new Point(0, 0);
+            LeftToolBar.Name = "LeftToolBar";
+            LeftToolBar.Size = new Size(34, 428);
+            LeftToolBar.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -292,6 +292,6 @@ namespace MyPaint
         private ToolStripButton btnSave;
         private ToolStripMenuItem menuNewFile;
         private Panel panel1;
-        private Controls.ToolBar toolBar1;
+        private Controls.ToolBar LeftToolBar;
     }
 }

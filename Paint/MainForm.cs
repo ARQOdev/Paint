@@ -16,7 +16,7 @@ namespace MyPaint
         private int default_width = 800;
         private int default_height = 600;
         private int pen_size = 3;
-        private bool drawing = false;
+        bool drawing = false;
         private string resizing = "";
         private Point prev_point;
         private Bitmap canvas_bitmap;
@@ -46,7 +46,7 @@ namespace MyPaint
             sfd.Filter = "PNG Files|*.png|JPG Files|*.jpg|BMP Files|*.bmp";
             sfd.RestoreDirectory = true;
 
-            CursorManager.CreateCursor(pen_size);
+            CursorManager.CreateCursor(ToolType.Pencil, pen_size);
 
             RecentList.RecentList.Init(Assembly.GetExecutingAssembly().GetName().Name!, menuRecent);
 
@@ -138,16 +138,78 @@ namespace MyPaint
             }
 
             prev_point = e.Location;
-            Color color = UserPalete.PaleteForeColor;
-            if (e.Button == MouseButtons.Right)
-                color = UserPalete.PaleteBackColor;
-            using (Brush brush = new SolidBrush(color))
+
+            switch (LeftToolBar.ActiveTool.ToolType)
             {
-                Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
-                canvas_graphics.FillEllipse(brush, circle_rectangle);
+                case ToolType.Pencil:
+                    {
+                        Color color = UserPalete.PaleteForeColor;
+                        if (e.Button == MouseButtons.Right)
+                            color = UserPalete.PaleteBackColor;
+                        using (Brush brush = new SolidBrush(color))
+                        {
+                            Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                            canvas_graphics.FillEllipse(brush, circle_rectangle);
+                        }
+                    }
+                    break;
+                case ToolType.Eraser:
+                    {
+                        Color color = UserPalete.PaleteBackColor;
+                        using (Brush brush = new SolidBrush(color))
+                        {
+                            Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                            canvas_graphics.FillEllipse(brush, circle_rectangle);
+                        }
+                    }
+                    break;
+                case ToolType.Dropper:
+                    {
+                        if (e.Button == MouseButtons.Left)
+                        {
+                            UserPalete.PaleteForeColor = canvas_bitmap.GetPixel(e.X, e.Y);
+                        }
+                        else if (e.Button == MouseButtons.Right)
+                        {
+                            UserPalete.PaleteBackColor = canvas_bitmap.GetPixel(e.X, e.Y);
+                        }
+                    }
+                    break;
+                case ToolType.PaintBucket:
+                    {
+                        Color color = UserPalete.PaleteForeColor;
+                        if (e.Button == MouseButtons.Right)
+                            color = UserPalete.PaleteBackColor;
+
+                        Queue<Point> q = new Queue<Point>();
+                        q.Enqueue(e.Location);
+                        Fill(q, color);
+
+                    }
+                    break;
+                default: break;
+            }
+
+            if (LeftToolBar.ActiveTool.ToolType == ToolType.Pencil)
+            {
+                Color color = UserPalete.PaleteForeColor;
+                if (e.Button == MouseButtons.Right)
+                    color = UserPalete.PaleteBackColor;
+                using (Brush brush = new SolidBrush(color))
+                {
+                    Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                    canvas_graphics.FillEllipse(brush, circle_rectangle);
+                }
             }
         }
         
+        private void Fill(Queue<Point> q, Color color)
+        {
+            Point current = q.Dequeue();
+
+            // bfs 
+        }
+
         private void pbCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             Rectangle bitmap_rectangle = new Rectangle(0, 0, canvas_bitmap.Width, canvas_bitmap.Height);
@@ -162,19 +224,47 @@ namespace MyPaint
 
             if (drawing)
             {
-                Color color = UserPalete.PaleteForeColor;
-                if (e.Button == MouseButtons.Right)
-                    color = UserPalete.PaleteBackColor;
-
-                using (Pen pen = new Pen(color, pen_size))
-                using (Brush brush = new SolidBrush(color))
+                switch(LeftToolBar.ActiveTool.ToolType)
                 {
-                    canvas_graphics.DrawLine(pen, prev_point, e.Location);
-                    Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
-                    canvas_graphics.FillEllipse(brush, circle_rectangle);
+                    case ToolType.Pencil:
+                        {
+                            Color color = UserPalete.PaleteForeColor;
+                            if (e.Button == MouseButtons.Right)
+                                color = UserPalete.PaleteBackColor;
+
+                            using (Pen pen = new Pen(color, pen_size))
+                            using (Brush brush = new SolidBrush(color))
+                            {
+                                canvas_graphics.DrawLine(pen, prev_point, e.Location);
+                                Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                                canvas_graphics.FillEllipse(brush, circle_rectangle);
+                            }
+                            prev_point = e.Location;
+                            pbCanvas.Invalidate();
+                        }
+                        break;
+                    case ToolType.Eraser:
+                        {
+                            Color color = UserPalete.PaleteBackColor;
+                            
+                            using (Pen pen = new Pen(color, pen_size))
+                            using (Brush brush = new SolidBrush(color))
+                            {
+                                canvas_graphics.DrawLine(pen, prev_point, e.Location);
+                                Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                                canvas_graphics.FillEllipse(brush, circle_rectangle);
+                            }
+                            prev_point = e.Location;
+                            pbCanvas.Invalidate();
+
+                            // e.Button == MouseButtons.Right
+                        }
+                        break;
+                    case ToolType.Dropper:
+                        break;
+
+                    default: break;
                 }
-                prev_point = e.Location;
-                pbCanvas.Invalidate();
 
                 return;
             }
@@ -317,6 +407,9 @@ namespace MyPaint
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
+            if (LeftToolBar.ActiveTool.ToolType != ToolType.Pencil && LeftToolBar.ActiveTool.ToolType != ToolType.Eraser)
+                return;
+
             if (e.KeyCode == Keys.OemCloseBrackets)
             {
                 if (pen_size == 100)
@@ -324,7 +417,7 @@ namespace MyPaint
                 else
                     pen_size++;
 
-                CursorManager.CreateCursor(pen_size);
+                CursorManager.CreateCursor(ToolType.Pencil, pen_size);
                 Rectangle bitmap_rectangle = new Rectangle(0, 0, canvas_bitmap.Width, canvas_bitmap.Height);
                 if (bitmap_rectangle.Contains(pbCanvas.PointToClient(Cursor.Position)))
                 {
@@ -340,7 +433,7 @@ namespace MyPaint
                 else
                     pen_size--;
 
-                CursorManager.CreateCursor(pen_size);
+                CursorManager.CreateCursor(ToolType.Pencil, pen_size);
                 Rectangle bitmap_rectangle = new Rectangle(0, 0, canvas_bitmap.Width, canvas_bitmap.Height);
                 if (bitmap_rectangle.Contains(pbCanvas.PointToClient(Cursor.Position)))
                 {
@@ -356,7 +449,7 @@ namespace MyPaint
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 pen_size = 3;
-                CursorManager.CreateCursor(pen_size);
+                CursorManager.CreateCursor(ToolType.Pencil, pen_size);
 
                 image_path = ofd.FileName;
                 switch (Path.GetExtension(image_path))
@@ -434,7 +527,7 @@ namespace MyPaint
         private void menuNewFile_Click(object sender, EventArgs e)
         {
             pen_size = 3;
-            CursorManager.CreateCursor(pen_size);
+            CursorManager.CreateCursor(ToolType.Pencil, pen_size);
 
             UserPalete.ResetPalete();
             canvas_graphics.Clear(UserPalete.PaleteBackColor);

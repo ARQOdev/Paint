@@ -19,12 +19,22 @@ namespace MyPaint.Controls
             {
                 return ForeColorItem.Color;
             }
+            set
+            {
+                ForeColorItem.Color = value;
+                ForeColorItem.Invalidate();
+            }
         }
         public Color PaleteBackColor
         {
             get
             {
                 return BackColorItem.Color;
+            }
+            set
+            {
+                BackColorItem.Color = value;
+                BackColorItem.Invalidate();
             }
         }
         private ColorPaleteItem ForeColorItem { get; set; }

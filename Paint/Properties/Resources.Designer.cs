@@ -61,6 +61,16 @@ namespace MyPaint.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] dropper {
+            get {
+                object obj = ResourceManager.GetObject("dropper", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap dropper_32x32 {
@@ -97,6 +107,16 @@ namespace MyPaint.Properties {
             get {
                 object obj = ResourceManager.GetObject("openFolder_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] paintBucket {
+            get {
+                object obj = ResourceManager.GetObject("paintBucket", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         

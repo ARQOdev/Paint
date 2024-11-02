@@ -36,6 +36,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             Name = "Tool";
             Size = new Size(30, 30);
+            Click += Tool_Click;
             Paint += Tool_Paint;
             ResumeLayout(false);
         }
