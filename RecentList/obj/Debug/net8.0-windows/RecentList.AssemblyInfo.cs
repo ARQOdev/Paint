@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RecentList")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9b1b2ff017033f2dcc17236f79999540bcdc2015")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2be1711ea7cadd0f1ca5e63db8d3c102d6fd23ff")]
 [assembly: System.Reflection.AssemblyProductAttribute("RecentList")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RecentList")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
