@@ -184,30 +184,49 @@ namespace MyPaint
                         Queue<Point> q = new Queue<Point>();
                         q.Enqueue(e.Location);
                         Fill(q, color);
-
                     }
                     break;
                 default: break;
-            }
-
-            if (LeftToolBar.ActiveTool.ToolType == ToolType.Pencil)
-            {
-                Color color = UserPalete.PaleteForeColor;
-                if (e.Button == MouseButtons.Right)
-                    color = UserPalete.PaleteBackColor;
-                using (Brush brush = new SolidBrush(color))
-                {
-                    Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
-                    canvas_graphics.FillEllipse(brush, circle_rectangle);
-                }
             }
         }
         
         private void Fill(Queue<Point> q, Color color)
         {
-            Point current = q.Dequeue();
+            int width = canvas_bitmap.Width;
+            int height = canvas_bitmap.Height;
 
-            // bfs 
+            bool[,] visited = new bool[width, height];
+            Point start = q.Peek();
+            visited[start.X, start.Y] = true;
+
+            Point[] directions = { new Point(0, -1), new Point(0, 1), new Point(-1, 0), new Point(1, 0) };
+
+            while (q.Count() > 0)
+            {
+                Point current = q.Dequeue();
+
+                foreach (Point dir in directions)
+                {
+                    Point neighbor = new Point(current.X + dir.X, current.Y + dir.Y);
+                    if (InBorder(neighbor) && !visited[neighbor.X, neighbor.Y] && SameColor(current, neighbor))
+                    {
+                        q.Enqueue(neighbor);
+                        visited[neighbor.X, neighbor.Y] = true;
+                    }
+                }
+
+                canvas_bitmap.SetPixel(current.X, current.Y, color);
+            }
+        }
+
+        private bool SameColor(Point a, Point b)
+        {
+            return canvas_bitmap.GetPixel(a.X, a.Y) == canvas_bitmap.GetPixel(b.X, b.Y);
+        }
+
+        public bool InBorder(Point pixel)
+        {
+            return pixel.X >= 0 && pixel.X < canvas_bitmap.Width && pixel.Y >= 0 && pixel.Y < canvas_bitmap.Height;
         }
 
         private void pbCanvas_MouseMove(object sender, MouseEventArgs e)
