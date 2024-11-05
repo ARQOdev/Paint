@@ -190,6 +190,7 @@ namespace MyPaint
             }
         }
         
+        // შესაცვლელია GetPixel & SetPixel
         private void Fill(Queue<Point> q, Color color)
         {
             int width = canvas_bitmap.Width;
