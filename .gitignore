@@ -1,1 +1,7 @@
 .vs/
+# Ignore build and debug files
+.bin/
+.obj/
+*.dll
+*.exe
+*.pdb
