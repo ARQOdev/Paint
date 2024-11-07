@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using MyPaint.Helpers;
 using RecentList;
+using System.Drawing.Imaging;
 
 namespace MyPaint
 {
@@ -16,6 +17,7 @@ namespace MyPaint
         private int default_width = 800;
         private int default_height = 600;
         private int pen_size = 3;
+        private int tolerance = 45;
         bool drawing = false;
         private string resizing = "";
         private Point prev_point;
@@ -195,8 +197,21 @@ namespace MyPaint
         {
             int width = canvas_bitmap.Width;
             int height = canvas_bitmap.Height;
-
             bool[,] visited = new bool[width, height];
+
+            BitmapData bmp_data = canvas_bitmap.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+
+            int bytes_per_pixel = 4;
+            int stride = bmp_data.Stride;
+            IntPtr ptr = bmp_data.Scan0;
+            byte[] pixel_data = new byte[stride * height];
+            System.Runtime.InteropServices.Marshal.Copy(ptr, pixel_data, 0, pixel_data.Length);
+
+            byte targetR = color.R;
+            byte targetG = color.G;
+            byte targetB = color.B;
+            byte targetA = color.A;
+
             Point start = q.Peek();
             visited[start.X, start.Y] = true;
 
@@ -209,20 +224,55 @@ namespace MyPaint
                 foreach (Point dir in directions)
                 {
                     Point neighbor = new Point(current.X + dir.X, current.Y + dir.Y);
-                    if (InBorder(neighbor) && !visited[neighbor.X, neighbor.Y] && SameColor(current, neighbor))
+                    if (InBorder(neighbor) && !visited[neighbor.X, neighbor.Y] && SameColor(current, neighbor, pixel_data, stride, bytes_per_pixel))
                     {
                         q.Enqueue(neighbor);
                         visited[neighbor.X, neighbor.Y] = true;
                     }
                 }
 
-                canvas_bitmap.SetPixel(current.X, current.Y, color);
+                // canvas_bitmap.SetPixel(current.X, current.Y, color);
+
+                int index = (current.Y * stride) + (current.X * bytes_per_pixel);
+                pixel_data[index] = targetB;
+                pixel_data[index + 1] = targetG;
+                pixel_data[index + 2] = targetR;
+                pixel_data[index + 3] = targetA;
             }
+
+            System.Runtime.InteropServices.Marshal.Copy(pixel_data, 0, ptr, pixel_data.Length);
+            canvas_bitmap.UnlockBits(bmp_data);
         }
 
-        private bool SameColor(Point a, Point b)
+        private bool SameColor(Point a, Point b, byte[] pixel_data, int stride, int bytes_per_pixel)
         {
-            return canvas_bitmap.GetPixel(a.X, a.Y) == canvas_bitmap.GetPixel(b.X, b.Y);
+            int indexA = (a.Y * stride) + (a.X * bytes_per_pixel);
+            int indexB = (b.Y * stride) + (b.X * bytes_per_pixel);
+
+            byte aB = pixel_data[indexA];
+            byte aG = pixel_data[indexA + 1];
+            byte aR = pixel_data[indexA + 2];
+            byte aA = pixel_data[indexA + 3];
+
+            byte bB = pixel_data[indexB];
+            byte bG = pixel_data[indexB + 1];
+            byte bR = pixel_data[indexB + 2];
+            byte bA = pixel_data[indexB + 3];
+
+            int diffR = Math.Abs(aR - bR);
+            int diffG = Math.Abs(aG - bG);
+            int diffB = Math.Abs(aB - bB);
+            int diffA = Math.Abs(aA - bA);
+
+            return diffR <= tolerance && diffG <= tolerance && diffB <= tolerance && diffA <= tolerance;
+
+            /*
+               return  pixel_data[indexA] == pixel_data[indexB] &&
+                    pixel_data[indexA + 1] == pixel_data[indexB + 1] &&
+                    pixel_data[indexA + 2] == pixel_data[indexB + 2] &&
+                    pixel_data[indexA + 3] == pixel_data[indexB + 3];
+            */
+            // return canvas_bitmap.GetPixel(a.X, a.Y) == canvas_bitmap.GetPixel(b.X, b.Y);
         }
 
         public bool InBorder(Point pixel)
