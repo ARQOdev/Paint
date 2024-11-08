@@ -17,7 +17,8 @@ namespace MyPaint.Controls {
         PaintBucket,
         Eraser,
         Dropper,
-        Text
+        Text,
+        Rectangle
     }
 
     public partial class Tool : UserControl

@@ -24,11 +24,13 @@ namespace MyPaint.Controls
             Tool paint_bucket = new Tool(Properties.Resources.paintBucket_32x32, "საღებავის ქილა", ToolType.PaintBucket);
             Tool eraser = new Tool(Properties.Resources.eraser_32x32, "საშლელი", ToolType.Eraser);
             Tool dropper = new Tool(Properties.Resources.dropper_32x32, "პიპეტი", ToolType.Dropper);
+            Tool rectangle = new Tool(Properties.Resources.dropper_32x32, "ოთხკუთხედი", ToolType.Rectangle);
 
             AddTool(pencil);
             AddTool(paint_bucket);
             AddTool(eraser);
             AddTool(dropper);
+            AddTool(rectangle);
 
             ActiveTool = pencil;
             pencil.Selected = true;
@@ -68,6 +70,10 @@ namespace MyPaint.Controls
                     break;
                 case ToolType.Dropper:
                     MyPaint.Helpers.CursorManager.CreateCursor(ToolType.Dropper, 0);
+                    break;
+
+                default:
+                    MyPaint.Helpers.CursorManager.CreateCursor(ToolType.Pencil, 1);
                     break;
             }
         }

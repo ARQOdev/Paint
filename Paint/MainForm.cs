@@ -17,7 +17,7 @@ namespace MyPaint
         private int default_width = 800;
         private int default_height = 600;
         private int pen_size = 3;
-        private int tolerance = 45;
+        private int tolerance = 80;
         bool drawing = false;
         private string resizing = "";
         private Point prev_point;
@@ -113,6 +113,8 @@ namespace MyPaint
             //if (propertyInfo != null) ^
             //    propertyInfo.SetValue(picture_box, value, null);
         }
+
+        #region მაუსის დაჭერა/მოძრაობა/აშვება
         private void pbCanvas_MouseDown(object sender, MouseEventArgs e)
         {
             Rectangle corner_rectangle = new Rectangle(canvas_bitmap.Width + 1, canvas_bitmap.Height + 1, 7, 7);
@@ -188,11 +190,14 @@ namespace MyPaint
                         Fill(q, color);
                     }
                     break;
+                case ToolType.Rectangle:
+                    prev_point = e.Location;
+                    break;
                 default: break;
             }
         }
-        
-        // შესაცვლელია GetPixel & SetPixel
+
+        #region ფერით შევსება
         private void Fill(Queue<Point> q, Color color)
         {
             int width = canvas_bitmap.Width;
@@ -265,20 +270,13 @@ namespace MyPaint
             int diffA = Math.Abs(aA - bA);
 
             return diffR <= tolerance && diffG <= tolerance && diffB <= tolerance && diffA <= tolerance;
-
-            /*
-               return  pixel_data[indexA] == pixel_data[indexB] &&
-                    pixel_data[indexA + 1] == pixel_data[indexB + 1] &&
-                    pixel_data[indexA + 2] == pixel_data[indexB + 2] &&
-                    pixel_data[indexA + 3] == pixel_data[indexB + 3];
-            */
-            // return canvas_bitmap.GetPixel(a.X, a.Y) == canvas_bitmap.GetPixel(b.X, b.Y);
         }
 
         public bool InBorder(Point pixel)
         {
             return pixel.X >= 0 && pixel.X < canvas_bitmap.Width && pixel.Y >= 0 && pixel.Y < canvas_bitmap.Height;
         }
+        #endregion
 
         private void pbCanvas_MouseMove(object sender, MouseEventArgs e)
         {
@@ -330,7 +328,20 @@ namespace MyPaint
                             // e.Button == MouseButtons.Right
                         }
                         break;
-                    case ToolType.Dropper:
+                    case ToolType.Rectangle:
+                        {
+                            Color color = UserPalete.PaleteForeColor;
+                            if (e.Button == MouseButtons.Right)
+                                color = UserPalete.PaleteBackColor;
+
+                            using (Pen pen = new Pen(color, pen_size))
+                            {
+                                Rectangle rectangle = new Rectangle(prev_point.X, prev_point.Y, e.X - prev_point.X, e.Y - prev_point.Y);
+                                canvas_graphics.DrawRectangle(pen, rectangle);
+                            }
+
+                            pbCanvas.Invalidate();
+                        }
                         break;
 
                     default: break;
@@ -430,11 +441,7 @@ namespace MyPaint
             resizing = "";
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            canvas_graphics.Dispose();
-            canvas_bitmap.Dispose();
-        }
+        #endregion
 
         private void pbCanvas_Paint(object sender, PaintEventArgs e)
         {
@@ -458,21 +465,6 @@ namespace MyPaint
                 }
             }
 
-        }
-
-        private void menuResize_Click(object sender, EventArgs e)
-        {
-            ResizeForm form = new ResizeForm(canvas_bitmap.Size);
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                Size size = form.GetNewSize();
-                Bitmap temp = (Bitmap)canvas_bitmap.Clone();
-                canvas_bitmap.Dispose();
-                canvas_bitmap = new Bitmap(size.Width, size.Height);
-                InitCanvasGraphics();
-                canvas_graphics.DrawImage(temp, new Point(0, 0));
-                temp.Dispose();
-            }
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -514,6 +506,22 @@ namespace MyPaint
             }
         }
 
+        private void menuResize_Click(object sender, EventArgs e)
+        {
+            ResizeForm form = new ResizeForm(canvas_bitmap.Size);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Size size = form.GetNewSize();
+                Bitmap temp = (Bitmap)canvas_bitmap.Clone();
+                canvas_bitmap.Dispose();
+                canvas_bitmap = new Bitmap(size.Width, size.Height);
+                InitCanvasGraphics();
+                canvas_graphics.DrawImage(temp, new Point(0, 0));
+                temp.Dispose();
+            }
+        }
+
+        #region ფაილის შენახვა/გახსნა ...
         private void menuOpen_Click(object sender, EventArgs e)
         {
             if (ofd.ShowDialog() == DialogResult.OK)
@@ -623,7 +631,13 @@ namespace MyPaint
         {
             Application.Exit();
         }
+        #endregion 
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            canvas_graphics.Dispose();
+            canvas_bitmap.Dispose();
+        }
         private void OnApplicationExit(object? sender, EventArgs e)
         {
             RecentList.RecentList.Save();
