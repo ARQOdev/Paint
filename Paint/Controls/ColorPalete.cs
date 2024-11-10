@@ -63,39 +63,40 @@ namespace MyPaint.Controls
 
             palete = new List<ColorPaleteItem>();
             colors = new List<Color>() {
-                Color.Black,
-                Color.White,
-                Color.Red,
-                Color.Green,
-                Color.Blue,
-                Color.Yellow,
-                Color.Orange,
-                Color.Pink,
-                Color.Purple,
-                Color.Brown,//
-                Color.Black,
-                Color.White,
-                Color.Red,
-                Color.Green,
-                Color.Blue,
-                Color.Yellow,
-                Color.Orange,
-                Color.Pink,
-                Color.Purple,
-                Color.Brown,//
-                Color.Black,
-                Color.White,
-                Color.Red,
-                Color.Green,
-                Color.Blue,
-                Color.Yellow,
-                Color.Orange,
-                Color.Pink,
-                Color.Purple,
-                Color.Brown
+                ColorTranslator.FromHtml("#000000"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#7F7F7F"),
+                ColorTranslator.FromHtml("#C8BFE7"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#880014"),
+                ColorTranslator.FromHtml("#B97858"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#FF7D27"),
+                ColorTranslator.FromHtml("#FFCA0C"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#FFF200"),
+                ColorTranslator.FromHtml("#EEE5B2"), //
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#22B14D"),
+                ColorTranslator.FromHtml("#B4E61D"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#00A2E8"),
+                ColorTranslator.FromHtml("#99D9EB"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#3E47CB"),
+                ColorTranslator.FromHtml("#7092BE"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#A249A4"),
+                ColorTranslator.FromHtml("#ED1C23"),
+                ColorTranslator.FromHtml("#FFFFFF"),
+                ColorTranslator.FromHtml("#FFAEC9"),
+                ColorTranslator.FromHtml("#C2C3C4"), //
+                ColorTranslator.FromHtml("#FFFFFF")
             };
             ItemCount = 30;
             int j = 0;
+            /* ზემოდან ქვემოთ
             for (int i = 0; i < ItemCount; i++)
             {
                 if (j == 10)
@@ -109,6 +110,25 @@ namespace MyPaint.Controls
                 }
                 this.Controls.Add(item);
                 item.Location = new Point(i / 10 * item.Width + i / 10, BackColorItem.Bottom + 6*gap + j * item.Height + j);
+                palete.Add(item);
+                item.ItemClicked += PaleteItemClicked;
+                j++;
+            }
+            */
+
+            for (int i = 0; i < ItemCount; i++)
+            {
+                if (j == 3)
+                    j = 0;
+
+                ColorPaleteItem item = new ColorPaleteItem();
+                item.Size = new Size(24, 24);
+                if (i < colors.Count)
+                {
+                    item.Color = colors[i];
+                }
+                this.Controls.Add(item);
+                item.Location = new Point(j * item.Width + j, BackColorItem.Bottom + 6 * gap + i / 3 * item.Height + i / 3);
                 palete.Add(item);
                 item.ItemClicked += PaleteItemClicked;
                 j++;

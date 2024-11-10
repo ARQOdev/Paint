@@ -23,7 +23,8 @@ namespace MyPaint
         private Point prev_point;
         private Bitmap canvas_bitmap;
         private Graphics canvas_graphics;
-        private Rectangle resize_rectangle = new Rectangle(-1, -1, -1, -1);
+        private Rectangle helper_rectangle = new Rectangle(-1, -1, -1, -1);
+        private MouseButtons mouse_button;
 
         private OpenFileDialog ofd;
         private SaveFileDialog sfd;
@@ -191,6 +192,7 @@ namespace MyPaint
                     }
                     break;
                 case ToolType.Rectangle:
+                    mouse_button = e.Button;
                     prev_point = e.Location;
                     break;
                 default: break;
@@ -198,6 +200,12 @@ namespace MyPaint
         }
 
         #region ფერით შევსება
+
+        /// <summary>
+        /// ერთნაირი ფერის პიქსელების გაფერადება (BFS)
+        /// </summary>
+        /// <param name="q">პიქსელების რიგი</param>
+        /// <param name="color">პიქსელის ახალი ფერი</param>
         private void Fill(Queue<Point> q, Color color)
         {
             int width = canvas_bitmap.Width;
@@ -229,7 +237,7 @@ namespace MyPaint
                 foreach (Point dir in directions)
                 {
                     Point neighbor = new Point(current.X + dir.X, current.Y + dir.Y);
-                    if (InBorder(neighbor) && !visited[neighbor.X, neighbor.Y] && SameColor(current, neighbor, pixel_data, stride, bytes_per_pixel))
+                    if (InBorder(neighbor) && !visited[neighbor.X, neighbor.Y] && SameColor(current, neighbor, ref pixel_data, stride, bytes_per_pixel))
                     {
                         q.Enqueue(neighbor);
                         visited[neighbor.X, neighbor.Y] = true;
@@ -249,7 +257,11 @@ namespace MyPaint
             canvas_bitmap.UnlockBits(bmp_data);
         }
 
-        private bool SameColor(Point a, Point b, byte[] pixel_data, int stride, int bytes_per_pixel)
+        /// <summary>
+        /// ამოწმებს ორ პიქსელს
+        /// </summary>
+        /// <returns>true თუ ერთი და იგივე ფერია, თუ არა false</returns>
+        private bool SameColor(Point a, Point b, ref byte[] pixel_data, int stride, int bytes_per_pixel)
         {
             int indexA = (a.Y * stride) + (a.X * bytes_per_pixel);
             int indexB = (b.Y * stride) + (b.X * bytes_per_pixel);
@@ -272,6 +284,9 @@ namespace MyPaint
             return diffR <= tolerance && diffG <= tolerance && diffB <= tolerance && diffA <= tolerance;
         }
 
+        /// <summary>
+        /// ამოწმებს პიქსელი არის თუ არა სახატავ საზღვრებს შიგნით
+        /// </summary>
         public bool InBorder(Point pixel)
         {
             return pixel.X >= 0 && pixel.X < canvas_bitmap.Width && pixel.Y >= 0 && pixel.Y < canvas_bitmap.Height;
@@ -330,15 +345,15 @@ namespace MyPaint
                         break;
                     case ToolType.Rectangle:
                         {
-                            Color color = UserPalete.PaleteForeColor;
-                            if (e.Button == MouseButtons.Right)
-                                color = UserPalete.PaleteBackColor;
+                            int x, y, w, h;
+                            x = Math.Min(e.X, prev_point.X);
+                            y = Math.Min(e.Y, prev_point.Y);
+                            w = Math.Abs(e.X - prev_point.X);
+                            h = Math.Abs(e.Y - prev_point.Y);
 
-                            using (Pen pen = new Pen(color, pen_size))
-                            {
-                                Rectangle rectangle = new Rectangle(prev_point.X, prev_point.Y, e.X - prev_point.X, e.Y - prev_point.Y);
-                                canvas_graphics.DrawRectangle(pen, rectangle);
-                            }
+                            helper_rectangle.Location = new Point(x, y);
+                            helper_rectangle.Width = w;
+                            helper_rectangle.Height = h;
 
                             pbCanvas.Invalidate();
                         }
@@ -369,20 +384,20 @@ namespace MyPaint
             switch (resizing)
             {
                 case "corner":
-                    resize_rectangle.Width = e.X;
-                    resize_rectangle.Height = e.Y;
+                    helper_rectangle.Width = e.X;
+                    helper_rectangle.Height = e.Y;
                     pbCanvas.Invalidate();
                     break;
 
                 case "right":
-                    resize_rectangle.Width = e.X;
-                    resize_rectangle.Height = canvas_bitmap.Height;
+                    helper_rectangle.Width = e.X;
+                    helper_rectangle.Height = canvas_bitmap.Height;
                     pbCanvas.Invalidate();
                     break;
 
                 case "bottom":
-                    resize_rectangle.Width = canvas_bitmap.Width;
-                    resize_rectangle.Height = e.Y;
+                    helper_rectangle.Width = canvas_bitmap.Width;
+                    helper_rectangle.Height = e.Y;
                     pbCanvas.Invalidate();
                     break;
 
@@ -393,6 +408,29 @@ namespace MyPaint
 
         private void pbCanvas_MouseUp(object sender, MouseEventArgs e)
         {
+
+            if (drawing)
+            {
+                switch (LeftToolBar.ActiveTool.ToolType)
+                {
+                    case ToolType.Rectangle:
+                        {
+                            Color color = UserPalete.PaleteForeColor;
+                            if (e.Button == MouseButtons.Right)
+                                color = UserPalete.PaleteBackColor;
+
+                            using (Pen pen = new Pen(color, 3))
+                            {
+                                canvas_graphics.DrawRectangle(pen, helper_rectangle);
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
             drawing = false;
 
             switch (resizing)
@@ -436,7 +474,7 @@ namespace MyPaint
                     break;
             }
 
-            resize_rectangle = new Rectangle(-1, -1, -1, -1);
+            helper_rectangle = new Rectangle(-1, -1, -1, -1);
             pbCanvas.Invalidate();
             resizing = "";
         }
@@ -461,7 +499,18 @@ namespace MyPaint
                 using (Pen pen = new Pen(Color.Gray))
                 {
                     pen.DashStyle = DashStyle.Dot;
-                    graphics.DrawRectangle(pen, resize_rectangle);
+                    graphics.DrawRectangle(pen, helper_rectangle);
+                }
+            }
+
+            if (drawing == true && LeftToolBar.ActiveTool.ToolType == ToolType.Rectangle)
+            {
+                Color color = UserPalete.PaleteForeColor;
+                if (mouse_button == MouseButtons.Right)
+                    color = UserPalete.PaleteBackColor;
+                using (Pen pen = new Pen(color, pen_size))
+                {
+                    graphics.DrawRectangle(pen, helper_rectangle);
                 }
             }
 
