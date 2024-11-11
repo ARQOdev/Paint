@@ -52,11 +52,14 @@ namespace MyPaint
             UserPalete = new Controls.ColorPalete();
             panel1 = new Panel();
             LeftToolBar = new Controls.ToolBar();
+            panel2 = new Panel();
+            zoomBar1 = new Controls.ZoomBar();
             menuStrip1.SuspendLayout();
             MainToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCanvas).BeginInit();
             pnlColorPalete.SuspendLayout();
             panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -198,7 +201,7 @@ namespace MyPaint
             pbCanvas.Dock = DockStyle.Fill;
             pbCanvas.Location = new Point(34, 55);
             pbCanvas.Name = "pbCanvas";
-            pbCanvas.Size = new Size(849, 428);
+            pbCanvas.Size = new Size(849, 344);
             pbCanvas.TabIndex = 3;
             pbCanvas.TabStop = false;
             pbCanvas.Paint += pbCanvas_Paint;
@@ -220,6 +223,8 @@ namespace MyPaint
             UserPalete.ItemCount = 30;
             UserPalete.Location = new Point(6, 3);
             UserPalete.Name = "UserPalete";
+            UserPalete.PaleteBackColor = Color.White;
+            UserPalete.PaleteForeColor = Color.Black;
             UserPalete.Size = new Size(76, 359);
             UserPalete.TabIndex = 0;
             // 
@@ -240,12 +245,30 @@ namespace MyPaint
             LeftToolBar.Size = new Size(34, 428);
             LeftToolBar.TabIndex = 0;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(zoomBar1);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(34, 399);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(849, 84);
+            panel2.TabIndex = 6;
+            // 
+            // zoomBar1
+            // 
+            zoomBar1.Location = new Point(439, 29);
+            zoomBar1.Name = "zoomBar1";
+            zoomBar1.Size = new Size(277, 31);
+            zoomBar1.TabIndex = 0;
+            zoomBar1.Value = 1F;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(971, 505);
             Controls.Add(pbCanvas);
+            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(pnlColorPalete);
             Controls.Add(StatusBar);
@@ -266,6 +289,7 @@ namespace MyPaint
             ((System.ComponentModel.ISupportInitialize)pbCanvas).EndInit();
             pnlColorPalete.ResumeLayout(false);
             panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -293,5 +317,7 @@ namespace MyPaint
         private ToolStripMenuItem menuNewFile;
         private Panel panel1;
         private Controls.ToolBar LeftToolBar;
+        private Panel panel2;
+        private Controls.ZoomBar zoomBar1;
     }
 }

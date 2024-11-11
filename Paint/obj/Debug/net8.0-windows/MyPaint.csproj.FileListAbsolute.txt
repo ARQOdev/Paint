@@ -25,3 +25,4 @@ C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.csproj.Asse
 C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.csproj.Up2Date
 C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.Controls.ToolBar.resources
 C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.Controls.Tool.resources
+C:\Anri\PROJECTS\Paint c# app\Paint\obj\Debug\net8.0-windows\MyPaint.Controls.ZoomBar.resources

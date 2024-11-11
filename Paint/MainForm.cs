@@ -55,6 +55,11 @@ namespace MyPaint
 
             Application.ApplicationExit += OnApplicationExit;
             RecentList.RecentList.RecentItemClicked += RecentList_RecentItemClicked;
+
+            RoundButton round_button = new RoundButton(MyPaint.Controls.Icon.Plus);
+            round_button.Size = new Size(23, 23);
+            panel2.Controls.Add(round_button);
+            round_button.Location = new Point(10, 10);
         }
 
         private void RecentList_RecentItemClicked(object sender, RecentItemClickedEventArgs e)
