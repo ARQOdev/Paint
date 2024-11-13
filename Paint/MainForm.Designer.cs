@@ -256,7 +256,7 @@ namespace MyPaint
             // 
             // zoomBar1
             // 
-            zoomBar1.Location = new Point(439, 29);
+            zoomBar1.Location = new Point(366, 20);
             zoomBar1.Name = "zoomBar1";
             zoomBar1.Size = new Size(277, 31);
             zoomBar1.TabIndex = 0;

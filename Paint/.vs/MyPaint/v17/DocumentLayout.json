@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\controls\\zoombar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:controls\\zoombar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\controls\\zoombar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:controls\\zoombar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\controls\\roundbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:controls\\roundbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\controls\\zoombar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:controls\\zoombar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|c:\\anri\\projects\\paint c# app\\paint\\mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:mainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\controls\\zoombar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{025189AD-A1BF-433B-81D2-2D6496709CE7}|MyPaint.csproj|solutionrelative:controls\\zoombar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +30,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 334,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "MainForm.cs [Design]",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
               "RelativeDocumentMoniker": "MainForm.cs",
@@ -49,7 +53,7 @@
               "RelativeDocumentMoniker": "MainForm.cs",
               "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\MainForm.cs",
               "RelativeToolTip": "MainForm.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAADsAAAAvAAAA",
+              "ViewState": "AQIAACsAAAAAAAAAAAAQwD0AAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-05T19:33:57.302Z",
               "IsPinned": true,
@@ -65,20 +69,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "RoundButton.cs",
+              "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\RoundButton.cs",
+              "RelativeDocumentMoniker": "Controls\\RoundButton.cs",
+              "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\RoundButton.cs",
+              "RelativeToolTip": "Controls\\RoundButton.cs",
+              "ViewState": "AQIAAFsAAAAAAAAAAAAAAGcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-13T13:31:21.422Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "ZoomBar.cs",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ZoomBar.cs",
               "RelativeDocumentMoniker": "Controls\\ZoomBar.cs",
               "ToolTip": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ZoomBar.cs",
               "RelativeToolTip": "Controls\\ZoomBar.cs",
-              "ViewState": "AQIAAEQAAAAAAAAAAAAAAFAAAABDAAAA",
+              "ViewState": "AQIAAG4AAAAAAAAAAAAAAJIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-10T15:56:43.886Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "ZoomBar.cs [Design]",
               "DocumentMoniker": "C:\\Anri\\PROJECTS\\Paint c# app\\Paint\\Controls\\ZoomBar.cs",
               "RelativeDocumentMoniker": "Controls\\ZoomBar.cs",

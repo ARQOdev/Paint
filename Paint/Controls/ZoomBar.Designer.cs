@@ -68,6 +68,10 @@
             pnlSlider.Size = new Size(165, 31);
             pnlSlider.TabIndex = 3;
             pnlSlider.Paint += pnlSlider_Paint;
+            pnlSlider.MouseDown += pnlSlider_MouseDown;
+            pnlSlider.MouseMove += pnlSlider_MouseMove;
+            pnlSlider.MouseUp += pnlSlider_MouseUp;
+            pnlSlider.Resize += pnlSlider_Resize;
             // 
             // ZoomBar
             // 
