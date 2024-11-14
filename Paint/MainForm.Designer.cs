@@ -46,14 +46,13 @@ namespace MyPaint
             btnNew = new ToolStripButton();
             btnOpen = new ToolStripButton();
             btnSave = new ToolStripButton();
-            StatusBar = new StatusStrip();
             pbCanvas = new PictureBox();
             pnlColorPalete = new Panel();
             UserPalete = new Controls.ColorPalete();
             panel1 = new Panel();
             LeftToolBar = new Controls.ToolBar();
             panel2 = new Panel();
-            zoomBar1 = new Controls.ZoomBar();
+            ZoomBar = new Controls.ZoomBar();
             menuStrip1.SuspendLayout();
             MainToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCanvas).BeginInit();
@@ -186,22 +185,13 @@ namespace MyPaint
             btnSave.Text = "toolStripButton3";
             btnSave.Click += btnSave_Click;
             // 
-            // StatusBar
-            // 
-            StatusBar.ImageScalingSize = new Size(20, 20);
-            StatusBar.Location = new Point(0, 483);
-            StatusBar.Name = "StatusBar";
-            StatusBar.Size = new Size(971, 22);
-            StatusBar.TabIndex = 2;
-            StatusBar.Text = "statusStrip1";
-            // 
             // pbCanvas
             // 
             pbCanvas.BackColor = Color.FromArgb(203, 213, 228);
             pbCanvas.Dock = DockStyle.Fill;
             pbCanvas.Location = new Point(34, 55);
             pbCanvas.Name = "pbCanvas";
-            pbCanvas.Size = new Size(849, 344);
+            pbCanvas.Size = new Size(849, 419);
             pbCanvas.TabIndex = 3;
             pbCanvas.TabStop = false;
             pbCanvas.Paint += pbCanvas_Paint;
@@ -215,7 +205,7 @@ namespace MyPaint
             pnlColorPalete.Dock = DockStyle.Right;
             pnlColorPalete.Location = new Point(883, 55);
             pnlColorPalete.Name = "pnlColorPalete";
-            pnlColorPalete.Size = new Size(88, 428);
+            pnlColorPalete.Size = new Size(88, 419);
             pnlColorPalete.TabIndex = 4;
             // 
             // UserPalete
@@ -234,7 +224,7 @@ namespace MyPaint
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 55);
             panel1.Name = "panel1";
-            panel1.Size = new Size(34, 428);
+            panel1.Size = new Size(34, 419);
             panel1.TabIndex = 5;
             // 
             // LeftToolBar
@@ -242,25 +232,26 @@ namespace MyPaint
             LeftToolBar.Dock = DockStyle.Fill;
             LeftToolBar.Location = new Point(0, 0);
             LeftToolBar.Name = "LeftToolBar";
-            LeftToolBar.Size = new Size(34, 428);
+            LeftToolBar.Size = new Size(34, 419);
             LeftToolBar.TabIndex = 0;
             // 
             // panel2
             // 
-            panel2.Controls.Add(zoomBar1);
+            panel2.Controls.Add(ZoomBar);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(34, 399);
+            panel2.Location = new Point(0, 474);
             panel2.Name = "panel2";
-            panel2.Size = new Size(849, 84);
+            panel2.Size = new Size(971, 31);
             panel2.TabIndex = 6;
             // 
-            // zoomBar1
+            // ZoomBar
             // 
-            zoomBar1.Location = new Point(366, 20);
-            zoomBar1.Name = "zoomBar1";
-            zoomBar1.Size = new Size(277, 31);
-            zoomBar1.TabIndex = 0;
-            zoomBar1.Value = 1M;
+            ZoomBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            ZoomBar.Location = new Point(688, 0);
+            ZoomBar.Name = "ZoomBar";
+            ZoomBar.Size = new Size(277, 31);
+            ZoomBar.TabIndex = 0;
+            ZoomBar.Value = new decimal(new int[] { 10, 0, 0, 65536 });
             // 
             // MainForm
             // 
@@ -268,12 +259,11 @@ namespace MyPaint
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(971, 505);
             Controls.Add(pbCanvas);
-            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(pnlColorPalete);
-            Controls.Add(StatusBar);
             Controls.Add(MainToolBar);
             Controls.Add(menuStrip1);
+            Controls.Add(panel2);
             Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
             MainMenuStrip = menuStrip1;
@@ -282,6 +272,7 @@ namespace MyPaint
             WindowState = FormWindowState.Maximized;
             FormClosing += MainForm_FormClosing;
             KeyDown += MainForm_KeyDown;
+            Resize += MainForm_Resize;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             MainToolBar.ResumeLayout(false);
@@ -299,7 +290,6 @@ namespace MyPaint
         private MenuStrip menuStrip1;
         private ToolStripMenuItem MenuFile;
         private ToolStrip MainToolBar;
-        private StatusStrip StatusBar;
         private PictureBox pbCanvas;
         private Panel pnlColorPalete;
         private Controls.ColorPalete UserPalete;
@@ -318,6 +308,6 @@ namespace MyPaint
         private Panel panel1;
         private Controls.ToolBar LeftToolBar;
         private Panel panel2;
-        private Controls.ZoomBar zoomBar1;
+        private Controls.ZoomBar ZoomBar;
     }
 }

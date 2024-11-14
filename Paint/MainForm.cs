@@ -31,6 +31,9 @@ namespace MyPaint
         private string image_path = "";
         System.Drawing.Imaging.ImageFormat image_format = System.Drawing.Imaging.ImageFormat.Png;
 
+        //
+        decimal ScaleFactor { get; set; } = 1.0m;
+
         public MainForm()
         {
             InitializeComponent();
@@ -56,10 +59,19 @@ namespace MyPaint
             Application.ApplicationExit += OnApplicationExit;
             RecentList.RecentList.RecentItemClicked += RecentList_RecentItemClicked;
 
-            RoundButton round_button = new RoundButton(MyPaint.Controls.Icon.Plus);
-            round_button.Size = new Size(23, 23);
-            panel2.Controls.Add(round_button);
-            round_button.Location = new Point(10, 10);
+            ZoomBar.ValueChanged += ZoomBar_ValueChanged;
+        }
+
+
+        private void ZoomBar_ValueChanged(object sender, EventArgs e)
+        {
+            ScaleFactor = ZoomBar.Value;
+            pbCanvas.Invalidate();
+        }
+
+        private Point GetScaledPoint(Point point)
+        {
+            return new Point((int)(point.X / ScaleFactor), (int)(point.Y / ScaleFactor));
         }
 
         private void RecentList_RecentItemClicked(object sender, RecentItemClickedEventArgs e)
@@ -98,7 +110,8 @@ namespace MyPaint
             canvas_graphics.CompositingMode = CompositingMode.SourceOver;
             canvas_graphics.CompositingQuality = CompositingQuality.HighQuality;
 
-            pbCanvas.Image = canvas_bitmap;
+            
+            //pbCanvas.Image = canvas_bitmap;
         }
 
         /* რთავს ან თიშავს Double Buffer-ს PictureBox-ში */
@@ -126,28 +139,31 @@ namespace MyPaint
             Rectangle corner_rectangle = new Rectangle(canvas_bitmap.Width + 1, canvas_bitmap.Height + 1, 7, 7);
             Rectangle right_rectangle = new Rectangle(canvas_bitmap.Width + 1, (canvas_bitmap.Height - 7) / 2, 7, 7);
             Rectangle bottom_rectangle = new Rectangle((canvas_bitmap.Width - 7) / 2, canvas_bitmap.Height + 1, 7, 7);
-            if (corner_rectangle.Contains(e.Location))
+
+            Point mouse_location = GetScaledPoint(e.Location);
+
+            if (corner_rectangle.Contains(mouse_location))
             {
                 resizing = "corner";
                 return;
             }
-            else if (right_rectangle.Contains(e.Location))
+            else if (right_rectangle.Contains(mouse_location))
             {
                 resizing = "right";
                 return;
             }
-            else if (bottom_rectangle.Contains(e.Location))
+            else if (bottom_rectangle.Contains(mouse_location))
             {
                 resizing = "bottom";
                 return;
             }
 
-            if (new Rectangle(new Point(0, 0), canvas_bitmap.Size).Contains(new Point(e.X, e.Y)))
+            if (new Rectangle(new Point(0, 0), canvas_bitmap.Size).Contains(mouse_location))
             {
                 drawing = true;
             }
 
-            prev_point = e.Location;
+            prev_point = mouse_location;
 
             switch (LeftToolBar.ActiveTool.ToolType)
             {
@@ -158,7 +174,7 @@ namespace MyPaint
                             color = UserPalete.PaleteBackColor;
                         using (Brush brush = new SolidBrush(color))
                         {
-                            Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                            Rectangle circle_rectangle = new Rectangle(mouse_location.X - pen_size / 2, mouse_location.Y - pen_size / 2, pen_size, pen_size);
                             canvas_graphics.FillEllipse(brush, circle_rectangle);
                         }
                     }
@@ -168,7 +184,7 @@ namespace MyPaint
                         Color color = UserPalete.PaleteBackColor;
                         using (Brush brush = new SolidBrush(color))
                         {
-                            Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                            Rectangle circle_rectangle = new Rectangle(mouse_location.X - pen_size / 2, mouse_location.Y - pen_size / 2, pen_size, pen_size);
                             canvas_graphics.FillEllipse(brush, circle_rectangle);
                         }
                     }
@@ -177,11 +193,11 @@ namespace MyPaint
                     {
                         if (e.Button == MouseButtons.Left)
                         {
-                            UserPalete.PaleteForeColor = canvas_bitmap.GetPixel(e.X, e.Y);
+                            UserPalete.PaleteForeColor = canvas_bitmap.GetPixel(mouse_location.X, mouse_location.Y);
                         }
                         else if (e.Button == MouseButtons.Right)
                         {
-                            UserPalete.PaleteBackColor = canvas_bitmap.GetPixel(e.X, e.Y);
+                            UserPalete.PaleteBackColor = canvas_bitmap.GetPixel(mouse_location.X, mouse_location.Y);
                         }
                     }
                     break;
@@ -192,13 +208,13 @@ namespace MyPaint
                             color = UserPalete.PaleteBackColor;
 
                         Queue<Point> q = new Queue<Point>();
-                        q.Enqueue(e.Location);
+                        q.Enqueue(mouse_location);
                         Fill(q, color);
                     }
                     break;
                 case ToolType.Rectangle:
                     mouse_button = e.Button;
-                    prev_point = e.Location;
+                    prev_point = mouse_location;
                     break;
                 default: break;
             }
@@ -300,8 +316,10 @@ namespace MyPaint
 
         private void pbCanvas_MouseMove(object sender, MouseEventArgs e)
         {
+            Point mouse_location = GetScaledPoint(e.Location);
+
             Rectangle bitmap_rectangle = new Rectangle(0, 0, canvas_bitmap.Width, canvas_bitmap.Height);
-            if (bitmap_rectangle.Contains(e.Location))
+            if (bitmap_rectangle.Contains(mouse_location))
             {
                 pbCanvas.Cursor = CursorManager.CurrentCursor;
             }
@@ -312,7 +330,7 @@ namespace MyPaint
 
             if (drawing)
             {
-                switch(LeftToolBar.ActiveTool.ToolType)
+                switch (LeftToolBar.ActiveTool.ToolType)
                 {
                     case ToolType.Pencil:
                         {
@@ -323,26 +341,26 @@ namespace MyPaint
                             using (Pen pen = new Pen(color, pen_size))
                             using (Brush brush = new SolidBrush(color))
                             {
-                                canvas_graphics.DrawLine(pen, prev_point, e.Location);
-                                Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                                canvas_graphics.DrawLine(pen, prev_point, mouse_location);
+                                Rectangle circle_rectangle = new Rectangle(mouse_location.X - pen_size / 2, mouse_location.Y - pen_size / 2, pen_size, pen_size);
                                 canvas_graphics.FillEllipse(brush, circle_rectangle);
                             }
-                            prev_point = e.Location;
+                            prev_point = mouse_location;
                             pbCanvas.Invalidate();
                         }
                         break;
                     case ToolType.Eraser:
                         {
                             Color color = UserPalete.PaleteBackColor;
-                            
+
                             using (Pen pen = new Pen(color, pen_size))
                             using (Brush brush = new SolidBrush(color))
                             {
-                                canvas_graphics.DrawLine(pen, prev_point, e.Location);
-                                Rectangle circle_rectangle = new Rectangle(e.X - pen_size / 2, e.Y - pen_size / 2, pen_size, pen_size);
+                                canvas_graphics.DrawLine(pen, prev_point, mouse_location);
+                                Rectangle circle_rectangle = new Rectangle(mouse_location.X - pen_size / 2, mouse_location.Y - pen_size / 2, pen_size, pen_size);
                                 canvas_graphics.FillEllipse(brush, circle_rectangle);
                             }
-                            prev_point = e.Location;
+                            prev_point = mouse_location;
                             pbCanvas.Invalidate();
 
                             // e.Button == MouseButtons.Right
@@ -351,10 +369,10 @@ namespace MyPaint
                     case ToolType.Rectangle:
                         {
                             int x, y, w, h;
-                            x = Math.Min(e.X, prev_point.X);
-                            y = Math.Min(e.Y, prev_point.Y);
-                            w = Math.Abs(e.X - prev_point.X);
-                            h = Math.Abs(e.Y - prev_point.Y);
+                            x = Math.Min(mouse_location.X, prev_point.X);
+                            y = Math.Min(mouse_location.Y, prev_point.Y);
+                            w = Math.Abs(mouse_location.X - prev_point.X);
+                            h = Math.Abs(mouse_location.Y - prev_point.Y);
 
                             helper_rectangle.Location = new Point(x, y);
                             helper_rectangle.Width = w;
@@ -376,33 +394,33 @@ namespace MyPaint
 
             if (resizing == "")
             {
-                if (corner_rectangle.Contains(e.Location))
+                if (corner_rectangle.Contains(mouse_location))
                     pbCanvas.Cursor = Cursors.SizeNWSE;
-                else if (right_rectangle.Contains(e.Location))
+                else if (right_rectangle.Contains(mouse_location))
                     pbCanvas.Cursor = Cursors.SizeWE;
-                else if (bottom_rectangle.Contains(e.Location))
+                else if (bottom_rectangle.Contains(mouse_location))
                     pbCanvas.Cursor = Cursors.SizeNS;
-                else if (!bitmap_rectangle.Contains(e.Location))
+                else if (!bitmap_rectangle.Contains(mouse_location))
                     pbCanvas.Cursor = Cursors.Default;
             }
 
             switch (resizing)
             {
                 case "corner":
-                    helper_rectangle.Width = e.X;
-                    helper_rectangle.Height = e.Y;
+                    helper_rectangle.Width = mouse_location.X;
+                    helper_rectangle.Height = mouse_location.Y;
                     pbCanvas.Invalidate();
                     break;
 
                 case "right":
-                    helper_rectangle.Width = e.X;
+                    helper_rectangle.Width = mouse_location.X;
                     helper_rectangle.Height = canvas_bitmap.Height;
                     pbCanvas.Invalidate();
                     break;
 
                 case "bottom":
                     helper_rectangle.Width = canvas_bitmap.Width;
-                    helper_rectangle.Height = e.Y;
+                    helper_rectangle.Height = mouse_location.Y;
                     pbCanvas.Invalidate();
                     break;
 
@@ -413,6 +431,7 @@ namespace MyPaint
 
         private void pbCanvas_MouseUp(object sender, MouseEventArgs e)
         {
+            Point mouse_location = GetScaledPoint(e.Location);
 
             if (drawing)
             {
@@ -444,7 +463,7 @@ namespace MyPaint
                     {
                         Bitmap temp = (Bitmap)canvas_bitmap.Clone();
                         canvas_bitmap.Dispose();
-                        canvas_bitmap = new Bitmap(e.X, e.Y);
+                        canvas_bitmap = new Bitmap(mouse_location.X, mouse_location.Y);
                         InitCanvasGraphics();
                         canvas_graphics.DrawImage(temp, new Point(0, 0));
                         temp.Dispose();
@@ -456,7 +475,7 @@ namespace MyPaint
                         Bitmap temp = (Bitmap)canvas_bitmap.Clone();
                         int height = canvas_bitmap.Height;
                         canvas_bitmap.Dispose();
-                        canvas_bitmap = new Bitmap(e.X, height);
+                        canvas_bitmap = new Bitmap(mouse_location.X, height);
                         InitCanvasGraphics();
                         canvas_graphics.DrawImage(temp, new Point(0, 0));
                         temp.Dispose();
@@ -468,7 +487,7 @@ namespace MyPaint
                         Bitmap temp = (Bitmap)canvas_bitmap.Clone();
                         int width = canvas_bitmap.Width;
                         canvas_bitmap.Dispose();
-                        canvas_bitmap = new Bitmap(width, e.Y);
+                        canvas_bitmap = new Bitmap(width, mouse_location.Y);
                         InitCanvasGraphics();
                         canvas_graphics.DrawImage(temp, new Point(0, 0));
                         temp.Dispose();
@@ -490,14 +509,22 @@ namespace MyPaint
         {
             Graphics graphics = e.Graphics;
 
-            graphics.FillRectangle(Brushes.White, canvas_bitmap.Width + 1, canvas_bitmap.Height + 1, 7, 7);
-            graphics.DrawRectangle(Pens.Black, canvas_bitmap.Width + 1, canvas_bitmap.Height + 1, 7, 7);
+            // პატარა რესაიზის ოთკუთხედები
+            int scaled_width = (int)(canvas_bitmap.Width * ScaleFactor);
+            int scaled_height = (int)(canvas_bitmap.Height * ScaleFactor);
 
-            graphics.FillRectangle(Brushes.White, canvas_bitmap.Width + 1, (canvas_bitmap.Height - 7) / 2, 7, 7);
-            graphics.DrawRectangle(Pens.Black, canvas_bitmap.Width + 1, (canvas_bitmap.Height - 7) / 2, 7, 7);
+            graphics.FillRectangle(Brushes.White, scaled_width + 1, scaled_height + 1, 7, 7);
+            graphics.DrawRectangle(Pens.Black, scaled_width + 1, scaled_height + 1, 7, 7);
 
-            graphics.FillRectangle(Brushes.White, (canvas_bitmap.Width - 7) / 2, canvas_bitmap.Height + 1, 7, 7);
-            graphics.DrawRectangle(Pens.Black, (canvas_bitmap.Width - 7) / 2, canvas_bitmap.Height + 1, 7, 7);
+            graphics.FillRectangle(Brushes.White, scaled_width + 1, (scaled_height - 7) / 2, 7, 7);
+            graphics.DrawRectangle(Pens.Black, scaled_width + 1, (scaled_height - 7) / 2, 7, 7);
+
+            graphics.FillRectangle(Brushes.White, (scaled_width - 7) / 2, scaled_height + 1, 7, 7);
+            graphics.DrawRectangle(Pens.Black, (scaled_width - 7) / 2, scaled_height + 1, 7, 7);
+            //
+
+            graphics.ScaleTransform((float)ScaleFactor, (float)ScaleFactor);
+            graphics.DrawImage(canvas_bitmap, 0, 0);
 
             if (resizing != "")
             {
@@ -518,7 +545,6 @@ namespace MyPaint
                     graphics.DrawRectangle(pen, helper_rectangle);
                 }
             }
-
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -695,6 +721,11 @@ namespace MyPaint
         private void OnApplicationExit(object? sender, EventArgs e)
         {
             RecentList.RecentList.Save();
+        }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            ZoomBar.Visible = this.Width > ZoomBar.Width + 24;
         }
     }
 }

@@ -86,6 +86,9 @@ namespace MyPaint.Controls
             else
                 Value = Value + 1.0m;
 
+            if (current_position < positions.Length - 1)
+                current_position++;
+
             lblValue.Text = String.Format("{0}%", (int)(Value * 100));
         }
 
@@ -95,6 +98,9 @@ namespace MyPaint.Controls
                 Value = Value - 0.1m;
             else
                 Value = Value - 1.0m;
+
+            if (current_position > 0)
+                current_position--;
 
             lblValue.Text = String.Format("{0}%", (int)(Value * 100));
         }
