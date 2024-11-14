@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -13,13 +14,16 @@ namespace MyPaint.Controls
 {
     public partial class ZoomBar : UserControl
     {
-        private float _value;
+        private decimal _value;
         private bool zoom = false;
         private int[] positions = new int[17];
-        private float[] values = {0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f, 8.0f };
+        private decimal[] values = {0.1m, 0.2m, 0.3m, 0.4m, 0.5m, 0.6m, 0.7m, 0.8m, 0.9m, 1.0m, 2.0m, 3.0m, 4.0m, 5.0m, 6.0m, 7.0m, 8.0m };
         private int current_position = 9;
 
-        public float Value
+        public delegate void ValueChangedDelegate(object sender, EventArgs e);
+        public event ValueChangedDelegate ValueChanged;
+
+        public decimal Value
         {
             get
             {
@@ -27,30 +31,29 @@ namespace MyPaint.Controls
             }
             set
             {
-                if (value < 0.1f)
+                if (value < 0.1m)
                 {
-                    _value = 0.1f;
+                    _value = 0.1m;
                     current_position = 0;
                 }
-                else if (value > 8.0f)
+                else if (value > 8.0m)
                 {
-                    _value = 8.0f;
+                    _value = 8.0m;
                     current_position = 16;
                 }
                 else
                 {
-                    if (value <= 1.0f)
+                    if (value <= 1.0m)
                     {
-                        _value = value - (value % 0.1f);
-                        current_position = (int)(value / 0.1f) - 1;
+                        _value = value - (value % 0.1m);
                     }
                     else
                     {
-                        _value = value - (value % 1f);
-                        current_position = (int)(value / 1f) - 1;
+                        _value = value - (value % 1m);
                     }
                 }
-                System.Diagnostics.Debug.WriteLine(Value);
+
+                ValueChanged?.Invoke(this, new EventArgs());
                 pnlSlider.Invalidate();
             }
         }
@@ -58,7 +61,7 @@ namespace MyPaint.Controls
         public ZoomBar()
         {
             InitializeComponent();
-            Value = 1.0f;
+            Value = 1.0m;
 
             RoundButton zoom_out_button = new RoundButton(Icon.Minus);
             zoom_out_button.Size = new Size(23, 23);
@@ -79,9 +82,9 @@ namespace MyPaint.Controls
         private void ZoomIn_Click(object? sender, EventArgs e)
         {
             if (Value < 1)
-                Value = Value + 0.1f;
+                Value = Value + 0.1m;
             else
-                Value = Value + 1.0f;
+                Value = Value + 1.0m;
 
             lblValue.Text = String.Format("{0}%", (int)(Value * 100));
         }
@@ -89,9 +92,9 @@ namespace MyPaint.Controls
         private void ZoomOut_Click(object? sender, EventArgs e)
         {
             if (Value <= 1)
-                Value = Value - 0.1f;
+                Value = Value - 0.1m;
             else
-                Value = Value - 1.0f;
+                Value = Value - 1.0m;
 
             lblValue.Text = String.Format("{0}%", (int)(Value * 100));
         }
@@ -149,6 +152,7 @@ namespace MyPaint.Controls
             {
                 current_position = new_position;
                 Value = values[new_position];
+                lblValue.Text = String.Format("{0}%", (int)(Value * 100));
             }
 
         }
@@ -161,7 +165,7 @@ namespace MyPaint.Controls
         private void pnlSlider_Resize(object sender, EventArgs e)
         {
             int size = pnlSlider.Width - 6;
-            int gap = size / 17;
+            int gap = size / 16;
             for (int i = 0; i < 17; i++)
             {
                 positions[i] = i * gap + 3;

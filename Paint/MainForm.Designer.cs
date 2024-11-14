@@ -260,7 +260,7 @@ namespace MyPaint
             zoomBar1.Name = "zoomBar1";
             zoomBar1.Size = new Size(277, 31);
             zoomBar1.TabIndex = 0;
-            zoomBar1.Value = 1F;
+            zoomBar1.Value = 1M;
             // 
             // MainForm
             // 
