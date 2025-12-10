@@ -17,8 +17,8 @@ namespace MyPaint
         private int default_width = 800;
         private int default_height = 600;
         private int pen_size = 3;
-        private int tolerance = 80;
-        bool drawing = false;
+        private int tolerance = 30;
+        private bool drawing = false;
         private string resizing = "";
         private Point prev_point;
         private Bitmap canvas_bitmap;
@@ -29,10 +29,15 @@ namespace MyPaint
         private OpenFileDialog ofd;
         private SaveFileDialog sfd;
         private string image_path = "";
-        System.Drawing.Imaging.ImageFormat image_format = System.Drawing.Imaging.ImageFormat.Png;
+        ImageFormat image_format = ImageFormat.Png;
 
-        //
+        private LinkedList<Bitmap> saves;
+        private LinkedListNode<Bitmap> current_bitmap;
+
         decimal ScaleFactor { get; set; } = 1.0m;
+
+        private int draw_position_x = 0;
+        private int draw_position_y = 0;
 
         public MainForm()
         {
@@ -41,6 +46,10 @@ namespace MyPaint
             InitCanvasGraphics();
 
             SetDoubleBuffering(pbCanvas, true);
+
+            saves = new LinkedList<Bitmap>();
+            saves.AddLast((Bitmap)canvas_bitmap.Clone());
+            current_bitmap = saves.Last!;
 
             ofd = new OpenFileDialog();
             ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
@@ -93,6 +102,7 @@ namespace MyPaint
             canvas_bitmap.Dispose();
             canvas_bitmap = (Bitmap)Bitmap.FromFile(image_path);
             InitCanvasGraphics(false);
+            pbCanvas.Invalidate();
 
             RecentList.RecentList.MoveToHead(image_path);
         }
@@ -109,9 +119,6 @@ namespace MyPaint
             canvas_graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             canvas_graphics.CompositingMode = CompositingMode.SourceOver;
             canvas_graphics.CompositingQuality = CompositingQuality.HighQuality;
-
-            
-            //pbCanvas.Image = canvas_bitmap;
         }
 
         /* რთავს ან თიშავს Double Buffer-ს PictureBox-ში */
@@ -191,8 +198,12 @@ namespace MyPaint
                     break;
                 case ToolType.Dropper:
                     {
+                        if (mouse_location.X >= canvas_bitmap.Width || mouse_location.Y >= canvas_bitmap.Height)
+                            return;
+
                         if (e.Button == MouseButtons.Left)
                         {
+                            Debug.WriteLine(string.Format("x = {0}, y = {1}, width = {2}, height = {3}", mouse_location.X, mouse_location.Y, canvas_bitmap.Width, canvas_bitmap.Height));
                             UserPalete.PaleteForeColor = canvas_bitmap.GetPixel(mouse_location.X, mouse_location.Y);
                         }
                         else if (e.Button == MouseButtons.Right)
@@ -203,6 +214,9 @@ namespace MyPaint
                     break;
                 case ToolType.PaintBucket:
                     {
+                        if (mouse_location.X >= canvas_bitmap.Width || mouse_location.Y >= canvas_bitmap.Height)
+                            return;
+
                         Color color = UserPalete.PaleteForeColor;
                         if (e.Button == MouseButtons.Right)
                             color = UserPalete.PaleteBackColor;
@@ -264,8 +278,6 @@ namespace MyPaint
                         visited[neighbor.X, neighbor.Y] = true;
                     }
                 }
-
-                // canvas_bitmap.SetPixel(current.X, current.Y, color);
 
                 int index = (current.Y * stride) + (current.X * bytes_per_pixel);
                 pixel_data[index] = targetB;
@@ -362,8 +374,6 @@ namespace MyPaint
                             }
                             prev_point = mouse_location;
                             pbCanvas.Invalidate();
-
-                            // e.Button == MouseButtons.Right
                         }
                         break;
                     case ToolType.Rectangle:
@@ -428,6 +438,7 @@ namespace MyPaint
                     break;
             }
         }
+
 
         private void pbCanvas_MouseUp(object sender, MouseEventArgs e)
         {
@@ -501,6 +512,12 @@ namespace MyPaint
             helper_rectangle = new Rectangle(-1, -1, -1, -1);
             pbCanvas.Invalidate();
             resizing = "";
+
+            // ctrl + z tuaris gaketebuli da shemdeg axali moqmedeba moxdeba shenaxuli bitmapebi agar gvchirdeba
+            while (current_bitmap != saves.Last)
+                saves.RemoveLast();
+            saves.AddLast((Bitmap)canvas_bitmap.Clone());
+            current_bitmap = saves.Last;
         }
 
         #endregion
@@ -509,22 +526,25 @@ namespace MyPaint
         {
             Graphics graphics = e.Graphics;
 
+            if (canvas_bitmap == null)
+                return;
+
             // პატარა რესაიზის ოთკუთხედები
             int scaled_width = (int)(canvas_bitmap.Width * ScaleFactor);
             int scaled_height = (int)(canvas_bitmap.Height * ScaleFactor);
 
-            graphics.FillRectangle(Brushes.White, scaled_width + 1, scaled_height + 1, 7, 7);
-            graphics.DrawRectangle(Pens.Black, scaled_width + 1, scaled_height + 1, 7, 7);
+            graphics.FillRectangle(Brushes.White, draw_position_x + scaled_width + 1, draw_position_y + scaled_height + 1, 7, 7);
+            graphics.DrawRectangle(Pens.Black, draw_position_x + scaled_width + 1, draw_position_y + scaled_height + 1, 7, 7);
 
-            graphics.FillRectangle(Brushes.White, scaled_width + 1, (scaled_height - 7) / 2, 7, 7);
-            graphics.DrawRectangle(Pens.Black, scaled_width + 1, (scaled_height - 7) / 2, 7, 7);
+            graphics.FillRectangle(Brushes.White, draw_position_x + scaled_width + 1, draw_position_y + (scaled_height - 7) / 2, 7, 7);
+            graphics.DrawRectangle(Pens.Black, draw_position_x + scaled_width + 1, draw_position_y + (scaled_height - 7) / 2, 7, 7);
 
-            graphics.FillRectangle(Brushes.White, (scaled_width - 7) / 2, scaled_height + 1, 7, 7);
-            graphics.DrawRectangle(Pens.Black, (scaled_width - 7) / 2, scaled_height + 1, 7, 7);
+            graphics.FillRectangle(Brushes.White, draw_position_x + (scaled_width - 7) / 2, draw_position_y + scaled_height + 1, 7, 7);
+            graphics.DrawRectangle(Pens.Black, draw_position_x + (scaled_width - 7) / 2, draw_position_y + scaled_height + 1, 7, 7);
             //
 
             graphics.ScaleTransform((float)ScaleFactor, (float)ScaleFactor);
-            graphics.DrawImage(canvas_bitmap, 0, 0);
+            graphics.DrawImage(canvas_bitmap, draw_position_x, draw_position_y);
 
             if (resizing != "")
             {
@@ -545,6 +565,8 @@ namespace MyPaint
                     graphics.DrawRectangle(pen, helper_rectangle);
                 }
             }
+
+            ScrollAdjustments();
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -589,6 +611,7 @@ namespace MyPaint
         private void menuResize_Click(object sender, EventArgs e)
         {
             ResizeForm form = new ResizeForm(canvas_bitmap.Size);
+
             if (form.ShowDialog() == DialogResult.OK)
             {
                 Size size = form.GetNewSize();
@@ -597,8 +620,32 @@ namespace MyPaint
                 canvas_bitmap = new Bitmap(size.Width, size.Height);
                 InitCanvasGraphics();
                 canvas_graphics.DrawImage(temp, new Point(0, 0));
-                temp.Dispose();
+                temp?.Dispose();
+                pbCanvas.Invalidate();
             }
+        }
+        private void menuUndo_Click(object sender, EventArgs e)
+        {
+            if (current_bitmap == saves.First)
+                return;
+
+            current_bitmap = current_bitmap.Previous!;
+            canvas_bitmap?.Dispose();
+            canvas_bitmap = (Bitmap)current_bitmap.Value.Clone();
+            InitCanvasGraphics(false);
+            pbCanvas.Invalidate();
+        }
+
+        private void menuRedo_Click(object sender, EventArgs e)
+        {
+            if (current_bitmap == saves.Last)
+                return;
+
+            current_bitmap = current_bitmap.Next!;
+            canvas_bitmap?.Dispose();
+            canvas_bitmap = (Bitmap)current_bitmap.Value.Clone();
+            InitCanvasGraphics(false);
+            pbCanvas.Invalidate();
         }
 
         #region ფაილის შენახვა/გახსნა ...
@@ -725,7 +772,43 @@ namespace MyPaint
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
-            ZoomBar.Visible = this.Width > ZoomBar.Width + 24;
+            ZoomBar.Visible = this.Width > (ZoomBar.Width + 24);
+            ScrollAdjustments();
+        }
+
+        private void ScrollAdjustments()
+        {
+            hScrollBar.Visible = (canvas_bitmap.Width * ScaleFactor > pbCanvas.Width);
+            vScrollBar.Visible = (canvas_bitmap.Height * ScaleFactor > pbCanvas.Height);
+            ScrollPanel.Visible = (hScrollBar.Visible && vScrollBar.Visible);
+            vScrollPanel.Width = vScrollBar.Visible ? 26 : 1;
+
+            if (!vScrollBar.Visible)
+            {
+                draw_position_y = 0;
+                vScrollBar.Value = vScrollBar.Minimum;
+            }
+
+            if (!hScrollBar.Visible)
+            {
+                draw_position_x = 0;
+                hScrollBar.Value = hScrollBar.Minimum;
+            }
+
+            vScrollBar.Maximum = (int)(canvas_bitmap.Height / ScaleFactor);
+            hScrollBar.Maximum = (int)(canvas_bitmap.Width / ScaleFactor);
+        }
+
+        private void vScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            draw_position_y = (int)(-vScrollBar.Value * ScaleFactor);
+            pbCanvas.Invalidate();
+        }
+
+        private void hScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            draw_position_x = (int)(-hScrollBar.Value * ScaleFactor);
+            pbCanvas.Invalidate();
         }
     }
 }

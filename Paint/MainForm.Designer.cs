@@ -42,6 +42,8 @@ namespace MyPaint
             menuClose = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             menuResize = new ToolStripMenuItem();
+            menuUndo = new ToolStripMenuItem();
+            menuRedo = new ToolStripMenuItem();
             MainToolBar = new ToolStrip();
             btnNew = new ToolStripButton();
             btnOpen = new ToolStripButton();
@@ -53,12 +55,17 @@ namespace MyPaint
             LeftToolBar = new Controls.ToolBar();
             panel2 = new Panel();
             ZoomBar = new Controls.ZoomBar();
+            vScrollBar = new VScrollBar();
+            hScrollBar = new HScrollBar();
+            vScrollPanel = new Panel();
+            ScrollPanel = new Panel();
             menuStrip1.SuspendLayout();
             MainToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbCanvas).BeginInit();
             pnlColorPalete.SuspendLayout();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            vScrollPanel.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -133,7 +140,7 @@ namespace MyPaint
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { menuResize });
+            editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { menuResize, menuUndo, menuRedo });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new Size(78, 24);
             editToolStripMenuItem.Text = "მართვა";
@@ -141,9 +148,25 @@ namespace MyPaint
             // menuResize
             // 
             menuResize.Name = "menuResize";
-            menuResize.Size = new Size(203, 26);
+            menuResize.Size = new Size(268, 26);
             menuResize.Text = "სურათის ზომა";
             menuResize.Click += menuResize_Click;
+            // 
+            // menuUndo
+            // 
+            menuUndo.Name = "menuUndo";
+            menuUndo.ShortcutKeys = Keys.Control | Keys.Z;
+            menuUndo.Size = new Size(268, 26);
+            menuUndo.Text = "უკან დაბრუნება";
+            menuUndo.Click += menuUndo_Click;
+            // 
+            // menuRedo
+            // 
+            menuRedo.Name = "menuRedo";
+            menuRedo.ShortcutKeys = Keys.Control | Keys.Y;
+            menuRedo.Size = new Size(268, 26);
+            menuRedo.Text = "წინ გადასვლა";
+            menuRedo.Click += menuRedo_Click;
             // 
             // MainToolBar
             // 
@@ -191,7 +214,7 @@ namespace MyPaint
             pbCanvas.Dock = DockStyle.Fill;
             pbCanvas.Location = new Point(34, 55);
             pbCanvas.Name = "pbCanvas";
-            pbCanvas.Size = new Size(849, 419);
+            pbCanvas.Size = new Size(823, 393);
             pbCanvas.TabIndex = 3;
             pbCanvas.TabStop = false;
             pbCanvas.Paint += pbCanvas_Paint;
@@ -253,12 +276,50 @@ namespace MyPaint
             ZoomBar.TabIndex = 0;
             ZoomBar.Value = new decimal(new int[] { 10, 0, 0, 65536 });
             // 
+            // vScrollBar
+            // 
+            vScrollBar.Dock = DockStyle.Fill;
+            vScrollBar.Location = new Point(0, 0);
+            vScrollBar.Name = "vScrollBar";
+            vScrollBar.Size = new Size(26, 393);
+            vScrollBar.TabIndex = 7;
+            vScrollBar.Scroll += vScrollBar_Scroll;
+            // 
+            // hScrollBar
+            // 
+            hScrollBar.Dock = DockStyle.Bottom;
+            hScrollBar.Location = new Point(34, 448);
+            hScrollBar.Name = "hScrollBar";
+            hScrollBar.Size = new Size(823, 26);
+            hScrollBar.TabIndex = 8;
+            hScrollBar.Scroll += hScrollBar_Scroll;
+            // 
+            // vScrollPanel
+            // 
+            vScrollPanel.Controls.Add(vScrollBar);
+            vScrollPanel.Controls.Add(ScrollPanel);
+            vScrollPanel.Dock = DockStyle.Right;
+            vScrollPanel.Location = new Point(857, 55);
+            vScrollPanel.Name = "vScrollPanel";
+            vScrollPanel.Size = new Size(26, 419);
+            vScrollPanel.TabIndex = 9;
+            // 
+            // ScrollPanel
+            // 
+            ScrollPanel.Dock = DockStyle.Bottom;
+            ScrollPanel.Location = new Point(0, 393);
+            ScrollPanel.Name = "ScrollPanel";
+            ScrollPanel.Size = new Size(26, 26);
+            ScrollPanel.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(971, 505);
             Controls.Add(pbCanvas);
+            Controls.Add(hScrollBar);
+            Controls.Add(vScrollPanel);
             Controls.Add(panel1);
             Controls.Add(pnlColorPalete);
             Controls.Add(MainToolBar);
@@ -281,6 +342,7 @@ namespace MyPaint
             pnlColorPalete.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            vScrollPanel.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -309,5 +371,11 @@ namespace MyPaint
         private Controls.ToolBar LeftToolBar;
         private Panel panel2;
         private Controls.ZoomBar ZoomBar;
+        private VScrollBar vScrollBar;
+        private HScrollBar hScrollBar;
+        private Panel vScrollPanel;
+        private Panel ScrollPanel;
+        private ToolStripMenuItem menuUndo;
+        private ToolStripMenuItem menuRedo;
     }
 }
